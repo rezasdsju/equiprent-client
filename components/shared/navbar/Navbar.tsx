@@ -52,15 +52,32 @@ const Navbar = () => {
 
                 {/* Navigation */}
                 <div className="hidden items-center gap-8 sm:flex">
-                    {navLinks.map((nav) => (
-                        <Link
-                            key={nav.href}
-                            href={nav.href}
-                            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                        >
-                            {nav.label}
-                        </Link>
-                    ))}
+                    <div className="flex items-center gap-8">
+                        {navLinks.map((nav) => (
+                            <Link
+                                key={nav.href}
+                                href={nav.href}
+                                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                            >
+                                {nav.label}
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div>
+                        {isPending ? (
+                            <div className="h-5 w-20 animate-pulse rounded-md bg-muted" />
+                        ) : (
+                            user && (
+                                <Link
+                                    href="/dashboard"
+                                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                >
+                                    Dashboard
+                                </Link>
+                            )
+                        )}
+                    </div>
                 </div>
 
                 {/* Actions */}
