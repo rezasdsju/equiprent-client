@@ -7,3 +7,13 @@ EquipRent is a rental marketplace where equipment owners can list their gear and
 ## Live Demo
 
 🔗 [equiprent-client-rk.vercel.app](https://equiprent-client-rk.vercel.app/)
+
+
+## Technologies
+
+- **Next.js**: React framework (App Router)
+- **TypeScript**: type-safe JavaScript
+- **Tailwind CSS**: utility-first styling
+- **shadcn/ui**: accessible UI components
+- **next-themes**: dark/light mode
+- **React Icons**: icon library
