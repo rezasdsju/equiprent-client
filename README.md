@@ -1,21 +1,9 @@
-# Next.js template
+# EquipRent: Rent Smart, Build Faster
 
-This is a Next.js template with shadcn/ui.
+EquipRent is a rental marketplace where equipment owners can list their gear and customers can browse, book, and rent it for a specific period. The platform covers equipment management, rental booking, secure online payments, and administrative control.
 
-## Adding components
+> This repository contains the **frontend** of the project.
 
-To add components to your app, run the following command:
+## Live Demo
 
-```bash
-npx shadcn@latest add button
-```
-
-This will place the ui components in the `components` directory.
-
-## Using components
-
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
-```
+🔗 [equiprent-client-rk.vercel.app](https://equiprent-client-rk.vercel.app/)
