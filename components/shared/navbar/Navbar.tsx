@@ -1,49 +1,99 @@
+
+'use client'
+
 import Image from "next/image";
+import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+
 import DarkLogo from '@/app/assets/dark-logo.png'
 import LightLogo from '@/app/assets/light-logo.png'
-import ThemeToggle from "./ThemeToggle";
 
+import ThemeToggle from "./ThemeToggle";
+import useSignOut from "@/hooks/useSignOut";
+import ProfileMenuPopOver from "./ProfileMenuPopOver";
+import { SkeletonAvatar } from "./AvatarSkeleton";
+
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
     { label: "Home", href: "/" },
     { label: "All Equipment", href: "/equipment" },
-    // { label: "Login", href: "/login" },
-    // { label: "Register", href: "/register" },
 ]
 
 const Navbar = () => {
+    const { data: session, isPending } = authClient.useSession()
+    const user = session?.user
+
+    const { handleSignOut, isSigningOut } = useSignOut()
+
     return (
-        <nav>
-            <div className="flex items-center justify-between max-w-6xl mx-auto px-1 sm:px-2 ">
-                <div>
+        <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+            <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+
+                {/* Logo */}
+                <Link href="/" className="shrink-0">
                     <Image
                         src={DarkLogo}
-                        alt="EquipRent" width={200}
-                        height={100}
+                        alt="EquipRent"
+                        width={160}
+                        height={80}
                         priority
-                        className="hidden dark:block"></Image>
+                        className="hidden dark:block"
+                    />
                     <Image
                         src={LightLogo}
                         alt="EquipRent"
-                        width={200} height={100}
+                        width={160}
+                        height={80}
                         priority
-                        className=" dark:hidden"></Image>
+                        className="dark:hidden"
+                    />
+                </Link>
+
+                {/* Navigation */}
+                <div className="hidden items-center gap-8 sm:flex">
+                    {navLinks.map((nav) => (
+                        <Link
+                            key={nav.href}
+                            href={nav.href}
+                            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                            {nav.label}
+                        </Link>
+                    ))}
                 </div>
-                <div className="flex items-center justify-end gap-5">
 
-                    <div className="hidden sm:flex items-center gap-5">
-                        {
-                            navLinks.map((nav) => <ul key={nav.href} >
-                                <li>{nav.label}</li>
-                            </ul>)
-                        }
-                    </div>
-                    <div className="flex items-center justify-center gap-3 sm:gap-5">
-                        <ThemeToggle />
-                        <button>Log in</button>
-                        <button>Register</button>
-                    </div>
+                {/* Actions */}
+                <div className="flex items-center gap-3 sm:gap-5">
 
+                    <ThemeToggle />
+
+                    {isPending ? (
+                        <SkeletonAvatar />
+                    ) : user ? (
+                        <div className="flex items-center gap-3">
+                            <ProfileMenuPopOver user={user} />
+
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={handleSignOut}
+                                disabled={isSigningOut}
+                            >
+                                {isSigningOut ? "Signing out..." : "Log Out"}
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <Button variant="ghost" size="sm" >
+                                <Link href="/sign-in">Log in</Link>
+                            </Button>
+
+                            <Button size="sm" >
+                                <Link href="/register">Register</Link>
+                            </Button>
+                        </div>
+                    )}
 
                 </div>
             </div>
