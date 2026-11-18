@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import BannerImage from "@/app/assets/banner-1.jpg"
 import { Button } from "@/components/ui/button"
-import { motion } from 'motion/react'
+import { motion } from "framer-motion";
 const Banner = () => {
     return (
         <section className="relative min-h-100 w-full overflow-hidden sm:min-h-125 lg:min-h-150">

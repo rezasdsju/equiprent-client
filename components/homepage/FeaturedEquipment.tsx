@@ -91,6 +91,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { MapPin, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const FeaturedEquipment = () => {
   const router = useRouter();
@@ -111,7 +112,12 @@ const FeaturedEquipment = () => {
     <section className="my-12 px-4 sm:my-16">
       <div className="">
         {/* Section Heading */}
-        <div className="mb-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">
             Explore Our Collection
           </p>
@@ -124,7 +130,7 @@ const FeaturedEquipment = () => {
             Find the right equipment for your next project.
             Explore quality machinery and rent with confidence.
           </p>
-        </div>
+        </motion.div>
 
         {/* Equipment Carousel */}
         <Carousel
