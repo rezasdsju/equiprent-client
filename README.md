@@ -12,8 +12,9 @@ EquipRent is a rental marketplace where equipment owners can list their gear and
 ## Technologies
 
 - **Next.js**: React framework (App Router)
-- **TypeScript**: type-safe JavaScript
-- **Tailwind CSS**: utility-first styling
-- **shadcn/ui**: accessible UI components
-- **next-themes**: dark/light mode
-- **React Icons**: icon library
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first styling
+- **shadcn/ui**: Accessible UI components
+- **next-themes**: Dark/light mode
+- **React Icons**: Icon library
+- **Framer Motion**: Animations and interactive motion effects
