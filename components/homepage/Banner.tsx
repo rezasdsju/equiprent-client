@@ -1,8 +1,9 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
 import BannerImage from "@/app/assets/banner-1.jpg"
 import { Button } from "@/components/ui/button"
-
+import { motion } from 'motion/react'
 const Banner = () => {
     return (
         <section className="relative min-h-100 w-full overflow-hidden sm:min-h-125 lg:min-h-150">
@@ -19,16 +20,31 @@ const Banner = () => {
             <div className="absolute inset-0 bg-linear-to-r from-black/45 via-black/20 to-transparent dark:from-black/35 dark:via-black/15 dark:to-transparent" />
 
             <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 space-y-4 sm:left-8 sm:right-auto sm:max-w-xl lg:left-16">
-                <h1 className="text-3xl font-bold leading-tight text-white drop-shadow-lg sm:text-5xl">
+                <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-3xl font-bold leading-tight text-white drop-shadow-lg sm:text-5xl"
+                >
                     Rent the Right Equipment, Right When You Need It
-                </h1>
+                </motion.h1>
 
-                <p className="max-w-2xl text-zinc-100 font-medium drop-shadow-md sm:text-lg">
+                <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="max-w-2xl text-zinc-100 font-medium drop-shadow-md sm:text-lg"
+                >
                     EquipRent connects equipment owners with customers. Browse available
                     gear, book it for the days you need, and pay securely online.
-                </p>
+                </motion.p>
 
-                <div className="flex flex-wrap items-center gap-3">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+
+                    className="flex flex-wrap items-center gap-3">
                     <Button size="lg">
                         <Link href="/equipment">Browse Equipment</Link>
                     </Button>
@@ -40,7 +56,7 @@ const Banner = () => {
                     >
                         <Link href="/dashboard/add-equipment">List Your Equipment</Link>
                     </Button>
-                </div>
+                </motion.div>
             </div>
         </section>
     )
