@@ -1,4 +1,4 @@
-
+'use client'
 
 
 export interface IEquipmentCategory {
@@ -73,13 +73,19 @@ export const equipmentCategories: IEquipmentCategory[] = [
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 
 const CategoriesSection = () => {
   return (
     <section className="py-16 md:py-20">
       <div className="container mx-auto px-4">
-        <div className="mb-10 flex flex-col gap-3 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 flex flex-col gap-3 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary">
             Explore Categories
           </p>
@@ -92,7 +98,9 @@ const CategoriesSection = () => {
             Explore a wide range of equipment categories and find the right
             tools for your next project.
           </p>
-        </div>
+        </motion.div>
+
+
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {equipmentCategories.map((category) => (
