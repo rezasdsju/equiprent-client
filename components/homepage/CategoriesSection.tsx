@@ -78,7 +78,7 @@ import { motion } from "framer-motion";
 
 const CategoriesSection = () => {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-16 md:py-20 max-w-7xl mx-auto">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

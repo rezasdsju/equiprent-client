@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion";
 const Banner = () => {
     return (
-        <section className="relative min-h-100 w-full overflow-hidden sm:min-h-125 lg:min-h-150">
+        <section className="relative min-h-100 w-full overflow-hidden sm:min-h-125 lg:min-h-150 max-w-7xl mx-auto">
             <Image
                 src={BannerImage}
                 alt="Construction and power equipment available for rent on EquipRent"

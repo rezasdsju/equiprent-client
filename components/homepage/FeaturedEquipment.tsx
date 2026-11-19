@@ -109,7 +109,7 @@ const FeaturedEquipment = () => {
   };
 
   return (
-    <section className="my-12 px-4 sm:my-16">
+    <section className="my-12 px-1 sm:my-16 max-w-7xl mx-auto">
       <div className="">
         {/* Section Heading */}
         <motion.div
@@ -135,7 +135,7 @@ const FeaturedEquipment = () => {
         {/* Equipment Carousel */}
         <Carousel
           opts={{ align: "start" }}
-          className="mx-auto w-full px-10"
+          className="mx-auto w-full px-1"
         >
           <CarouselContent>
             {featuredEquipment
