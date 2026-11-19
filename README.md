@@ -15,7 +15,7 @@ EquipRent is an equipment rental marketplace where users can explore equipment a
 ## Features
 
 - **Responsive Navbar:** Navigation across the application.
-- **User Authentication:** User sign-in functionality.
+- **User Authentication:** Sign up and sign in with email and password, including profile image upload via ImgBB.
 - **User Information:** Displays the signed-in user's email and avatar in the banner.
 - **Theme Toggle:** Switch between light and dark themes.
 - **All Equipment Page:** Displays approved equipment in a card layout.
