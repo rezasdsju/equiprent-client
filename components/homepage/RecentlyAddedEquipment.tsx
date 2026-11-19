@@ -58,7 +58,7 @@ export const recentlyAddedEquipment: IRecentEquipment[] = [
 const RecentlyAddedEquipment = () => {
     return (
         <section className="py-16 md:py-20 max-w-7xl mx-auto">
-            <div className="container mx-auto px-1">
+            <div className=" mx-auto px-1">
                 {/* Section Heading */}
                 <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
                     <div>
