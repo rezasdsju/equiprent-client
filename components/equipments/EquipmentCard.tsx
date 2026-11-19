@@ -58,7 +58,7 @@ const EquipmentCard = ({ equipment }: { equipment: IEquipment }) => {
 
         {/* View Details */}
         <Link
-          href={`/equipment/${equipment._id}`}
+          href={`/all-equipments/${equipment._id}`}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
         >
           View Details
