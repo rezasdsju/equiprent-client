@@ -20,13 +20,11 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
 import { toast } from "@/components/ui/toast"
+import Link from "next/link"
 
 
 
-export default function LoginForm({
-    className,
-    ...props
-}: React.ComponentProps<"div">) {
+export default function SigninPage() {
 
     const router = useRouter()
     const [clickedToLoginrButton, setClickedToLoginrButton] = useState(false)
@@ -60,8 +58,31 @@ export default function LoginForm({
         }
     }
 
+
+    const handleGoogleSignIn = async () => {
+        const { data, error } = await authClient.signIn.social({
+            provider: 'google',
+            callbackURL: '/'
+        })
+
+        if (error) {
+            toast.add({
+                type: 'error',
+                description: 'Google sign-in failed. Please try again.',
+                priority: 'high'
+            })
+        }
+
+        if (data) {
+            toast.add({
+                type: 'success',
+                description: 'Redirecting to Google...',
+                priority: 'high'
+            })
+        }
+    }
     return (
-        <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <div className="flex flex-col gap-6 max-w-7xl mx-auto">
             <Card>
                 <CardHeader>
                     <CardTitle>Login to your account</CardTitle>
@@ -96,11 +117,13 @@ export default function LoginForm({
                             </Field>
                             <Field>
                                 <Button disabled={clickedToLoginrButton} type="submit">Login</Button>
-                                <Button variant="outline" type="button">
+                                <Button
+                                    onClick={handleGoogleSignIn}
+                                    variant="outline" type="button">
                                     Login with Google
                                 </Button>
                                 <FieldDescription className="text-center">
-                                    Don&apos;t have an account? <a href="#">Register</a>
+                                    Don&apos;t have an account? <Link href="/register">Register</Link>
                                 </FieldDescription>
                             </Field>
                         </FieldGroup>

@@ -83,6 +83,29 @@ export default function RegisterForm() {
         }
     }
 
+
+    const handleGoogleSignIn = async () => {
+        const { data, error } = await authClient.signIn.social({
+            provider: 'google',
+            callbackURL: '/'
+        })
+
+        if (error) {
+            toast.add({
+                type: 'error',
+                description: 'Google sign-in failed. Please try again.',
+                priority: 'high'
+            })
+        }
+
+        if (data) {
+            toast.add({
+                type: 'success',
+                description: 'Redirecting to Google...',
+                priority: 'high'
+            })
+        }
+    }
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
@@ -192,8 +215,10 @@ export default function RegisterForm() {
                         <FieldGroup>
                             <Field>
                                 <Button disabled={clickedToRegisterButton || isUploadingImage} type="submit">Create Account</Button>
-                                <Button variant="outline" type="button">
-                                    Sign up with Google
+                                <Button
+                                    onClick={handleGoogleSignIn}
+                                    variant="outline" type="button">
+                                    Continue with Google
                                 </Button>
                                 <FieldDescription className="px-6 text-center">
                                     Already have an account? <Link href="/sign-in">Log in</Link>
