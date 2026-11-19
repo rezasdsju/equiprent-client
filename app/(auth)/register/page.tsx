@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/toast"
 import { authClient } from "@/lib/auth-client"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 
@@ -39,10 +40,24 @@ export default function RegisterForm() {
             })
             return
         }
-        setClickedToRegisterButton(true)
+
         const formData = new FormData(e.currentTarget)
         const userData = Object.fromEntries(formData.entries())
+        const password = userData.password as string
 
+        if (
+            password.length < 6 ||
+            !/[A-Z]/.test(password) ||
+            !/[a-z]/.test(password)
+        ) {
+            toast.add({
+                type: "error",
+                description: "Password must contain uppercase, lowercase letters and at least 6 characters",
+                priority: "high"
+            })
+            return
+        }
+        setClickedToRegisterButton(true)
         const { data, error } = await authClient.signUp.email({
             name: userData.name as string,
             email: userData.email as string,
@@ -170,7 +185,7 @@ export default function RegisterForm() {
                             <FieldLabel htmlFor="password">Password</FieldLabel>
                             <Input name="password" id="password" type="password" required />
                             <FieldDescription>
-                                Must be at least 8 characters long.
+                                Must contain an uppercase letter, a lowercase letter, and at least 6 characters.
                             </FieldDescription>
                         </Field>
 
@@ -181,7 +196,7 @@ export default function RegisterForm() {
                                     Sign up with Google
                                 </Button>
                                 <FieldDescription className="px-6 text-center">
-                                    Already have an account? <a href="#">Log in</a>
+                                    Already have an account? <Link href="/sign-in">Log in</Link>
                                 </FieldDescription>
                             </Field>
                         </FieldGroup>
