@@ -45,7 +45,7 @@ export const customerReviews: ICustomerReview[] = [
 const CustomerReviews = () => {
   return (
     <section className="py-16 md:py-20 max-w-7xl mx-auto">
-      <div className="container mx-auto px-4">
+      <div className=" mx-auto px-1 ">
         {/* Section Heading */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
