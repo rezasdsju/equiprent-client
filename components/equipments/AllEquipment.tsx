@@ -1,4 +1,3 @@
-"use client"
 
 import Image from "next/image"
 
@@ -12,140 +11,9 @@ import EquipmentCard from "./EquipmentCard";
 
 
 
-export const equipmentData: IEquipment[] = [
-    {
-        id: "eq-001",
-        name: "Mini Excavator",
-        category: "Construction Equipment",
-        rentalPrice: 8500,
-        rentalType: "Daily",
-        location: "Dhaka",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1580901368919-7738efb0f87e?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-18T10:30:00Z",
-    },
-    {
-        id: "eq-002",
-        name: "Forklift",
-        category: "Construction Equipment",
-        rentalPrice: 6000,
-        rentalType: "Daily",
-        location: "Chattogram",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-17T08:15:00Z",
-    },
-    {
-        id: "eq-003",
-        name: "Concrete Mixer",
-        category: "Construction Equipment",
-        rentalPrice: 4000,
-        rentalType: "Daily",
-        location: "Sylhet",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-16T12:00:00Z",
-    },
-    {
-        id: "eq-004",
-        name: "DSLR Camera",
-        category: "Photography Equipment",
-        rentalPrice: 1500,
-        rentalType: "Daily",
-        location: "Dhaka",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-15T09:45:00Z",
-    },
-    {
-        id: "eq-005",
-        name: "Sedan Car",
-        category: "Vehicles & Transportation",
-        rentalPrice: 5000,
-        rentalType: "Daily",
-        location: "Dhaka",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-14T14:20:00Z",
-    },
-    {
-        id: "eq-006",
-        name: "Power Drill",
-        category: "Electronics",
-        rentalPrice: 1000,
-        rentalType: "Daily",
-        location: "Rajshahi",
-        availability: "Unavailable",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-13T11:10:00Z",
-    },
-    {
-        id: "eq-007",
-        name: "Agricultural Tractor",
-        category: "Agriculture Equipment",
-        rentalPrice: 5000,
-        rentalType: "Daily",
-        location: "Rangpur",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-12T07:30:00Z",
-    },
-    {
-        id: "eq-008",
-        name: "Professional Sound System",
-        category: "Event Equipment",
-        rentalPrice: 2500,
-        rentalType: "Daily",
-        location: "Khulna",
-        availability: "Unavailable",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-10T16:00:00Z",
-    },
-    {
-        id: "eq-009",
-        name: "Professional Video Camera",
-        category: "Photography Equipment",
-        rentalPrice: 800,
-        rentalType: "Hourly",
-        location: "Dhaka",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-09T13:00:00Z",
-    },
-    {
-        id: "eq-010",
-        name: "Portable Generator",
-        category: "Electronics",
-        rentalPrice: 1800,
-        rentalType: "Daily",
-        location: "Gazipur",
-        availability: "Available",
-        approvalStatus: "approved",
-        image:
-            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80",
-        createdAt: "2026-11-08T10:00:00Z",
-    },
-];
 
-const AllEquipment = () => {
+const AllEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
+
     return (
         <div className="pb-16">
             <section
@@ -193,11 +61,11 @@ const AllEquipment = () => {
 
 
 
-            <div>
-                <div className="grid gird-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                    {
-                        equipmentData.map((equipment: IEquipment) => <EquipmentCard key={equipment.id} equipment={equipment}></EquipmentCard>)
-                    }
+            <div className="mx-auto w-full max-w-7xl px-4 sm:w-[calc(100%-2rem)] sm:px-0 lg:w-[calc(100%-3rem)] my-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                    {equipments.map((equipment) => (
+                        <EquipmentCard key={equipment._id} equipment={equipment} />
+                    ))}
                 </div>
             </div>
         </div>
