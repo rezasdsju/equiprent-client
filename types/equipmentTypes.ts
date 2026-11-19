@@ -1,5 +1,5 @@
 export interface IEquipment {
-  id: string;
+  _id: string;
   name: string;
   category: string;
   rentalPrice: number;
