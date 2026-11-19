@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <nav className="sticky top-0 z-50 border-b bg-background">
-            <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-1 sm:px-2">
 
                 {/* Logo */}
                 <Link href="/" className="shrink-0">
