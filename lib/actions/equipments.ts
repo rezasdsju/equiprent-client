@@ -20,3 +20,10 @@ export const updateEquipment = async (updateEquipmentData: IEquipment, id: strin
     const result = await res.json()
     return { ok: res.ok, ...result }
 }
+
+export const deleteEquipment = async (id: string) => {
+    const api = `${BASE_URL}/my-equipments/${id}`
+    const res = await protectedMutation(api, 'DELETE')
+    const result = await res.json()
+    return { ok: res.ok, ...result }
+}
