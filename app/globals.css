@@ -127,3 +127,7 @@
     @apply font-sans;
     }
 }
+
+.max-w-7xl [data-slot="sidebar-container"] {
+  position: absolute !important;
+}
