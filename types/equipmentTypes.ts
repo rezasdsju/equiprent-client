@@ -11,7 +11,7 @@ export interface IEquipment {
   description: string;
   category: string;
   rentalPrice: number;
-  rentalType: "Hourly" | "Daily" | "Weekly" | "Monthly";
+  rentalType: "Daily" | "Weekly" | "Monthly";
   location: string;
   availableQuantity: number;
   availability: "Available" | "Unavailable";
@@ -25,16 +25,16 @@ export interface IEquipment {
 
 
 export interface IAddEquipment {
-    name: string;
-    description: string;
-    category: string;
-    rentalPrice: number;
-    rentalType: "Hourly" | "Daily" | "Weekly" | "Monthly";
-    location: string;
-    availableQuantity: number;
-    condition: string;
-    brand: string;
-    model: string;
-    image: string;
-    rentalTerms: string;
+  name: string;
+  description: string;
+  category: string;
+  rentalPrice: number;
+  rentalType: "Daily" | "Weekly" | "Monthly";
+  location: string;
+  availableQuantity: number;
+  condition: string;
+  brand: string;
+  model: string;
+  image: string;
+  rentalTerms: string;
 }
