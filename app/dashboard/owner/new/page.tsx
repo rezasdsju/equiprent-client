@@ -17,19 +17,7 @@ import { UploadImage } from "@/hooks/useImageUpload"
 import { addEquipment } from "@/lib/actions/equipments"
 import { IAddEquipment } from "@/types/equipmentTypes"
 
-const CATEGORIES = [
-    "Construction Equipment",
-    "Photography Equipment",
-    "Vehicles & Transportation",
-    "Agriculture Equipment",
-    "Electronics",
-    "Event Equipment",
-    "Medical Equipment",
-    "Sports & Fitness Equipment",
-]
-
-
-const RENTAL_TYPES = ["Daily", "Weekly", "Monthly"] as const
+import { CATEGORIES, RENTAL_TYPES } from "@/constants/equipment";
 
 const Field = ({
     label,
