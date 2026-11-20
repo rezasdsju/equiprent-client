@@ -37,7 +37,7 @@ const useSignOut = () => {
                 priority: "high",
             })
 
-            router.replace("/signin")
+            router.replace("/sign-in")
         }
     }
     return { handleSignOut, isSigningOut }
