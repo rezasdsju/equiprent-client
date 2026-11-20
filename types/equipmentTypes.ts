@@ -21,3 +21,20 @@ export interface IEquipment {
   rentalTerms: string;
   createdAt: string;
 }
+
+
+
+export interface AddEquipmentPayload {
+    name: string;
+    description: string;
+    category: string;
+    rentalPrice: number;
+    rentalType: "Hourly" | "Daily" | "Weekly" | "Monthly";
+    location: string;
+    availableQuantity: number;
+    condition: string;
+    brand: string;
+    model: string;
+    image: string;
+    rentalTerms: string;
+}
