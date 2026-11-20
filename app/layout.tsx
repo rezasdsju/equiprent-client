@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google"
+import { Toaster } from "@/components/ui/toast"
 
 import "./globals.css"
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Navbar></Navbar>
           {children}
           <Footer></Footer>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
