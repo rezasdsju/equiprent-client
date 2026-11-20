@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/toast"
+import { UploadImage } from "@/hooks/useImageUpload"
 import { authClient } from "@/lib/auth-client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -22,10 +23,8 @@ import React, { useState } from "react"
 
 export default function RegisterForm() {
 
+    const { imagePreview, imageUrl, isUploadingImage, handleImageChange } = UploadImage()
 
-    const [imagePreview, setImagePreview] = useState<string | null>(null)
-    const [imageUrl, setImageUrl] = useState<string>('')
-    const [isUploadingImage, setIsUploadingImage] = useState(false)
     const [clickedToRegisterButton, setClickedToRegisterButton] = useState(false)
     const router = useRouter()
     const handleRegister = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -106,42 +105,7 @@ export default function RegisterForm() {
             })
         }
     }
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (!file) return
-        if (file) {
-            setImagePreview(URL.createObjectURL(file))
-            setImageUrl("")
-            setIsUploadingImage(true)
-        }
-        try {
-            const formData = new FormData()
-            formData.append('image', file)
-            const res = await fetch("/api/upload-image", {
-                method: "POST",
-                body: formData
-            })
-            const result = await res.json()
 
-            if (!res.ok) {
-                throw new Error(result.message)
-            }
-            setImageUrl(result.imageUrl)
-        } catch (error) {
-            console.error(error)
-
-            toast.add({
-                type: "error",
-                description: "Image upload failed",
-                priority: "high"
-            })
-
-        } finally {
-            setIsUploadingImage(false)
-        }
-
-
-    }
     return (
         <Card className="max-w-7xl mx-auto">
             <CardHeader>
