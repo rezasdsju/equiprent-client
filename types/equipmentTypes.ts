@@ -24,7 +24,7 @@ export interface IEquipment {
 
 
 
-export interface AddEquipmentPayload {
+export interface IAddEquipment {
     name: string;
     description: string;
     category: string;
