@@ -1,7 +1,10 @@
-
+'use client'
+import { updateEquipment } from "@/lib/actions/equipments";
 import { IEquipment } from "@/types/equipmentTypes";
+import { UpdateEquipment } from "./UpdateEquipment";
 
 const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
+
     return (
         <div className="w-full space-y-6">
             <div>
@@ -51,23 +54,21 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                         </td>
                                         <td className="px-5 py-4">
                                             <span className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${equipment.approvalStatus === "approved"
-                                                    ? "bg-green-100 text-green-700"
-                                                    : equipment.approvalStatus === "rejected"
-                                                        ? "bg-red-100 text-red-700"
-                                                        : "bg-yellow-100 text-yellow-700"
+                                                ? "bg-green-100 text-green-700"
+                                                : equipment.approvalStatus === "rejected"
+                                                    ? "bg-red-100 text-red-700"
+                                                    : "bg-yellow-100 text-yellow-700"
                                                 }`}>
                                                 {equipment.approvalStatus}
                                             </span>
                                         </td>
                                         <td className="px-5 py-4">
                                             <div className="flex items-center gap-2">
-                                                <button disabled className="rounded-md border px-3 py-1.5 text-xs opacity-60">
-                                                    Update
-                                                </button>
-                                                <button disabled className="rounded-md border px-3 py-1.5 text-xs opacity-60">
+                                                <UpdateEquipment equipment={equipment}></UpdateEquipment>
+                                                <button className="rounded-md border px-3 py-1.5 text-xs opacity-60">
                                                     Delete
                                                 </button>
-                                                <button disabled className="rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-60">
+                                                <button className="rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-60">
                                                     View Details
                                                 </button>
                                             </div>
@@ -107,10 +108,10 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                 <div className="flex items-center justify-between gap-2">
                                     <span className="text-sm text-muted-foreground">Status</span>
                                     <span className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${equipment.approvalStatus === "approved"
-                                            ? "bg-green-100 text-green-700"
-                                            : equipment.approvalStatus === "rejected"
-                                                ? "bg-red-100 text-red-700"
-                                                : "bg-yellow-100 text-yellow-700"
+                                        ? "bg-green-100 text-green-700"
+                                        : equipment.approvalStatus === "rejected"
+                                            ? "bg-red-100 text-red-700"
+                                            : "bg-yellow-100 text-yellow-700"
                                         }`}>
                                         {equipment.approvalStatus}
                                     </span>
