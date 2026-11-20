@@ -50,7 +50,7 @@ export default function SigninPage() {
         if (data) {
             toast.add({
                 type: 'success',
-                description: 'success',
+                description: 'You have successfully signed in!',
                 priority: 'high'
             })
             router.push('/')
