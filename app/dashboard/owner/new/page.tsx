@@ -24,10 +24,12 @@ const CATEGORIES = [
     "Agriculture Equipment",
     "Electronics",
     "Event Equipment",
+    "Medical Equipment",
+    "Sports & Fitness Equipment",
 ]
 
 
-const RENTAL_TYPES = ["Hourly", "Daily", "Weekly", "Monthly"] as const
+const RENTAL_TYPES = ["Daily", "Weekly", "Monthly"] as const
 
 const Field = ({
     label,

@@ -17,11 +17,12 @@ const CATEGORY_ITEMS = [
     { value: "Electronics", label: "Electronics" },
     { value: "Event Equipment", label: "Event Equipment" },
     { value: "Vehicles & Transportation", label: "Vehicles & Transportation" },
+    { value: "Medical Equipment", label: "Medical Equipment" },
+    { value: "Sports & Fitness Equipment", label: "Sports & Fitness Equipment" },
 ]
 
 const RENTAL_TYPE_ITEMS = [
     { value: "all", label: "All Types" },
-    { value: "Hourly", label: "Hourly" },
     { value: "Daily", label: "Daily" },
     { value: "Weekly", label: "Weekly" },
     { value: "Monthly", label: "Monthly" },
