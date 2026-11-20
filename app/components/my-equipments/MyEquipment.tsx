@@ -2,6 +2,7 @@
 import { updateEquipment } from "@/lib/actions/equipments";
 import { IEquipment } from "@/types/equipmentTypes";
 import { UpdateEquipment } from "./UpdateEquipment";
+import { DeleteEquipment } from "./DeleteEquipment";
 
 const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
 
@@ -65,9 +66,7 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                         <td className="px-5 py-4">
                                             <div className="flex items-center gap-2">
                                                 <UpdateEquipment equipment={equipment}></UpdateEquipment>
-                                                <button className="rounded-md border px-3 py-1.5 text-xs opacity-60">
-                                                    Delete
-                                                </button>
+                                                <DeleteEquipment equipment={equipment}></DeleteEquipment>
                                                 <button className="rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-60">
                                                     View Details
                                                 </button>
