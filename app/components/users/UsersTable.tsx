@@ -16,14 +16,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+
 import { IUser } from "@/types/userTypes"
+import UserRole from "./UserRole"
 
 
 
@@ -111,26 +106,15 @@ const UsersTable = ({ users }: { users: IUser[] }) => {
                                         </TableCell>
 
                                         <TableCell>
-                                            {user.createdAt}
+                                            {new Date(user.createdAt).toLocaleDateString('en-GB', {
+                                                day: '2-digit',
+                                                month: 'short',
+                                                year: 'numeric',
+                                            })}
                                         </TableCell>
 
                                         <TableCell>
-                                            <Select defaultValue={user.role}>
-                                                <SelectTrigger className="w-32.5">
-                                                    <SelectValue />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="customer">
-                                                        Customer
-                                                    </SelectItem>
-                                                    <SelectItem value="owner">
-                                                        Owner
-                                                    </SelectItem>
-                                                    <SelectItem value="admin">
-                                                        Admin
-                                                    </SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                            <UserRole user={user}></UserRole>
                                         </TableCell>
 
                                         <TableCell className="text-right">
