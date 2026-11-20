@@ -31,7 +31,7 @@ export default function RegisterForm() {
         e.preventDefault()
         if (isUploadingImage) return
 
-        if (imagePreview && !imageUrl) {
+        if (!imagePreview && !imageUrl) {
             toast.add({
                 type: "error",
                 description: "Please upload your profile photo again",
