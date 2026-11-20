@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,6 +10,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import React, { useState } from "react"
+import { toast } from "@/components/ui/toast"
+import { FieldDescription } from "@/components/ui/field"
+import { UploadImage } from "@/hooks/useImageUpload"
+import { addEquipment } from "@/lib/actions/equipments"
+import { IAddEquipment } from "@/types/equipmentTypes"
 
 const CATEGORIES = [
     "Construction Equipment",
@@ -19,7 +26,8 @@ const CATEGORIES = [
     "Event Equipment",
 ]
 
-const RENTAL_TYPES = ["Daily", "Weekly", "Monthly"]
+
+const RENTAL_TYPES = ["Hourly", "Daily", "Weekly", "Monthly"] as const
 
 const Field = ({
     label,
@@ -37,6 +45,95 @@ const Field = ({
 )
 
 const AddEquipmentPage = () => {
+
+
+    const [selectedCategory, setSelectedCategory] = useState<string | null>("")
+    const [rentalType, setRentalType] = useState<string | null>("")
+
+    const { resetImage, imagePreview, imageUrl, isUploadingImage, handleImageChange } = UploadImage()
+    const [clickedToAddButton, setClickedToAddButton] = useState(false)
+
+    const handleAddEquipment = async (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        if (isUploadingImage) return
+
+        if (!imageUrl) {
+            toast.add({
+                type: "error",
+                description: "Please upload an equipment image",
+                priority: "high"
+            })
+            return
+        }
+        const form = e.currentTarget
+        const formData = new FormData(e.currentTarget)
+
+        if (!rentalType || !selectedCategory) {
+            toast.add({
+                type: "error",
+                description: "Please select a category and rental type",
+                priority: "high",
+            })
+            return
+        }
+
+        const equipmentData: IAddEquipment = {
+            name: formData.get("name") as string,
+            description: formData.get("description") as string,
+            category: selectedCategory,
+            location: formData.get("location") as string,
+            rentalPrice: Number(formData.get("rentalPrice")),
+            rentalType: rentalType as IAddEquipment["rentalType"],
+            availableQuantity: Number(formData.get("availableQuantity")),
+            condition: formData.get("condition") as string,
+            brand: formData.get("brand") as string,
+            model: formData.get("model") as string,
+            image: imageUrl,
+            rentalTerms: formData.get("rentalTerms") as string,
+        }
+
+        // console.log('equipmentData: ', equipmentData)
+        setClickedToAddButton(true)
+
+        try {
+            const result = await addEquipment(equipmentData)
+
+            if (!result.ok) {
+                toast.add({
+                    type: "error",
+                    description: result.message ?? "Failed to add equipment",
+                    priority: "high"
+                })
+                return
+            }
+
+            toast.add({
+                type: "success",
+                description: "Equipment added successfully!",
+                priority: "high"
+            })
+
+            form.reset()
+            setSelectedCategory("")
+            setRentalType("")
+            resetImage()
+        } catch (error) {
+            // console.error("Add equipment error:", error)
+
+            toast.add({
+                type: "error",
+                description: "Something went wrong. Please try again.",
+                priority: "high"
+            })
+
+        } finally {
+
+            setClickedToAddButton(false)
+        }
+    }
+
+
     return (
         <section className="mx-auto max-w-3xl px-3 py-6 sm:px-4 sm:py-10">
             <div className="mb-6">
@@ -46,14 +143,19 @@ const AddEquipmentPage = () => {
                 </p>
             </div>
 
-            <div className="rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
+            <form
+                onSubmit={handleAddEquipment}
+                className="rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
                 <div className="grid gap-5 sm:grid-cols-2">
                     <Field label="Equipment Name" htmlFor="name">
-                        <Input id="name" placeholder="e.g. Mini Excavator" />
+                        <Input name="name" id="name" placeholder="e.g. Mini Excavator" required />
                     </Field>
 
                     <Field label="Category" htmlFor="category">
-                        <Select>
+                        <Select
+                            value={selectedCategory}
+                            onValueChange={setSelectedCategory}
+                        >
                             <SelectTrigger id="category" className="w-full">
                                 <SelectValue placeholder="Select a category" />
                             </SelectTrigger>
@@ -70,6 +172,7 @@ const AddEquipmentPage = () => {
                     <div className="sm:col-span-2">
                         <Field label="Description" htmlFor="description">
                             <Textarea
+                                name="description"
                                 id="description"
                                 rows={4}
                                 placeholder="Describe the equipment, its features and usage"
@@ -78,15 +181,18 @@ const AddEquipmentPage = () => {
                     </div>
 
                     <Field label="Location" htmlFor="location">
-                        <Input id="location" placeholder="e.g. Dhaka" />
+                        <Input name="location" id="location" placeholder="e.g. Dhaka" required />
                     </Field>
 
                     <Field label="Rental Price" htmlFor="rentalPrice">
-                        <Input id="rentalPrice" type="number" min={0} placeholder="e.g. 2500" />
+                        <Input name="rentalPrice" id="rentalPrice" type="number" min={0} placeholder="e.g. 2500" required />
                     </Field>
 
                     <Field label="Rental Type" htmlFor="rentalType">
-                        <Select>
+                        <Select
+                            value={rentalType}
+                            onValueChange={setRentalType}
+                        >
                             <SelectTrigger id="rentalType" className="w-full">
                                 <SelectValue placeholder="Select rental type" />
                             </SelectTrigger>
@@ -101,28 +207,65 @@ const AddEquipmentPage = () => {
                     </Field>
 
                     <Field label="Available Quantity" htmlFor="availableQuantity">
-                        <Input id="availableQuantity" type="number" min={1} placeholder="e.g. 3" />
+                        <Input name="availableQuantity" id="availableQuantity" type="number" min={1} placeholder="e.g. 3" required />
                     </Field>
 
                     <Field label="Equipment Condition" htmlFor="condition">
-                        <Input id="condition" placeholder="e.g. Excellent, Good, Used" />
+                        <Input name="condition" id="condition" placeholder="e.g. Excellent, Good, Used" required />
                     </Field>
 
                     <Field label="Brand" htmlFor="brand">
-                        <Input id="brand" placeholder="e.g. Caterpillar" />
+                        <Input name="brand" id="brand" placeholder="e.g. Caterpillar" required />
                     </Field>
 
                     <Field label="Model" htmlFor="model">
-                        <Input id="model" placeholder="e.g. 305 CR" />
+                        <Input name="model" id="model" placeholder="e.g. 305 CR" required />
                     </Field>
 
-                    <Field label="Equipment Image" htmlFor="image">
-                        <Input id="image" type="file" accept="image/*" />
+                    {/* <Field label="Equipment Image" htmlFor="image">
+                        <Input name="image" id="image" type="file" accept="image/*" required />
                     </Field>
+ */}
+
+
+
+                    <div className={`flex items-center justify-between ${imagePreview && 'gap-5'}`}>
+                        <div>
+                            {imagePreview && (
+                                <img
+                                    src={imagePreview}
+                                    alt="Equipment Image Preview"
+                                    className="mt-3 size-20 rounded-full object-cover"
+                                />
+                            )}
+                        </div>
+                        <Field label="Equipment Image" htmlFor="image">
+                            <Input
+                                name="image"
+                                id="image"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+
+                            />
+                            <FieldDescription>
+                                {isUploadingImage
+                                    ? "Uploading image..."
+                                    : imageUrl
+                                        ? "Image uploaded successfully"
+                                        : "Upload your Equipment photo"}
+                            </FieldDescription>
+                        </Field>
+
+                    </div>
+
+
+
 
                     <div className="sm:col-span-2">
                         <Field label="Rental Terms and Conditions" htmlFor="rentalTerms">
                             <Textarea
+                                name="rentalTerms"
                                 id="rentalTerms"
                                 rows={4}
                                 placeholder="Security deposit, late fees, usage rules..."
@@ -135,9 +278,11 @@ const AddEquipmentPage = () => {
                     <Button type="button" variant="outline">
                         Cancel
                     </Button>
-                    <Button type="button">Add Equipment</Button>
+                    <Button
+                        disabled={isUploadingImage || clickedToAddButton}
+                        type="submit">Add Equipment</Button>
                 </div>
-            </div>
+            </form>
         </section>
     )
 }
