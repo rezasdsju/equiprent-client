@@ -1,6 +1,6 @@
 
 'use server'
-import { IAddEquipment } from "@/types/equipmentTypes"
+import { IAddEquipment, IEquipment } from "@/types/equipmentTypes"
 import { protectedMutation } from "../core/server"
 
 
@@ -11,5 +11,12 @@ export const addEquipment = async (equipmentData: IAddEquipment) => {
     const res = await protectedMutation(`${BASE_URL}/add-equipment`, 'POST', equipmentData)
     const result = await res.json()
 
+    return { ok: res.ok, ...result }
+}
+
+export const updateEquipment = async (updateEquipmentData: IEquipment, id: string) => {
+    const api = `${BASE_URL}/my-equipments/${id}`
+    const res = await protectedMutation(api, 'PATCH', updateEquipmentData)
+    const result = await res.json()
     return { ok: res.ok, ...result }
 }
