@@ -25,6 +25,7 @@ export interface IEquipment {
 
 
 export interface IAddEquipment {
+  _id?:string, 
   name: string;
   description: string;
   category: string;
