@@ -12,6 +12,8 @@ EquipRent is an equipment rental marketplace where users can explore equipment a
 
 🔗 [EquipRent Server](https://github.com/rezasdsju/equiprent-server)
 
+
+
 ## Features
 
 - **Responsive Navbar:** Navigation across the application.
@@ -25,6 +27,13 @@ EquipRent is an equipment rental marketplace where users can explore equipment a
 - **Sorting:** Price (low to high), price (high to low), and recently added.
 - **Equipment Cards:** Display equipment image, name, category, rental price, rental type, location, and availability status.
 - **Equipment Details Page:** Private route, available to authenticated users only.
+- **Role-Based Dashboards:** Separate dashboard areas for customers, owners, and admins based on user roles.
+- **Owner Equipment Management:** Allows authenticated owners to add, view, update, and delete their own equipment.
+- **Equipment Creation Authorization:** Restricts equipment creation to authenticated owners and assigns owner information from the authenticated user.
+- **Protected Owner Equipment Data:** Fetches an owner's equipment using an authorization token and verifies ownership on the backend.
+- **Equipment Update and Deletion:** Allows owners to update or delete only their own equipment through protected API routes.
+- **Admin User Management:** Provides an admin dashboard with a users table, accessible only to admins through a protected API endpoint.
+
 
 ## Technologies
 
