@@ -42,10 +42,12 @@ export const UploadImage = () => {
         } finally {
             setIsUploadingImage(false)
         }
-
-
     }
-
-    return { imagePreview, imageUrl, isUploadingImage, handleImageChange }
+    const resetImage = () => {
+        setImagePreview("")
+        setImageUrl("")
+        setIsUploadingImage(false)
+    }
+    return { resetImage, imagePreview, imageUrl, isUploadingImage, handleImageChange }
 
 }
