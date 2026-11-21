@@ -20,7 +20,7 @@ import { toast } from "../ui/toast"
 import { IAddBooking } from "@/types/bookingTypes"
 import { bookEquipment } from "@/lib/actions/bookings"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
+
 
 const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
     const isAvailable = equipment.availableQuantity > 0
@@ -90,7 +90,7 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
             }
             toast.add({
                 type: 'success',
-                description: 'Booking created successfully. Redirecting to the checkout page...',
+                description: 'Booking Drafted successfully. Redirecting to the checkout page...',
                 priority: 'high',
             })
             router.push(`/payment?bookingId=${result.insertedId}`)
