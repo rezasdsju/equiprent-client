@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/tooltip"
 import { updateApprovalStatus } from "@/lib/actions/equipments"
 import { IEquipment } from "@/types/equipmentTypes"
+import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import type { ReactNode } from "react"
+import { useState, type ReactNode } from "react"
 
 interface ButtonTooltipProps {
     size: "icon-sm" | "icon" | "icon-lg",
@@ -33,12 +34,10 @@ const ButtonTooltip = ({
     equipment,
     action
 }: ButtonTooltipProps) => {
-
-
-
     const router = useRouter()
-    const handleApprove = async () => {
-        if (action !== 'approve') {
+    const [approvalHandling, setApprovalHandling] = useState(false)
+    const handleApprovalStatus = async () => {
+        if (action !== 'approve' && action !== 'reject') {
             return
         }
         // console.log('approve')
@@ -50,9 +49,10 @@ const ButtonTooltip = ({
             })
             return
         }
-
+        setApprovalHandling(true)
         try {
-            const result = await updateApprovalStatus(equipment._id, 'approved')
+            const approvalStatus = action === 'approve' ? 'approved' : 'rejected'
+            const result = await updateApprovalStatus(equipment._id, approvalStatus)
             // console.log(result)
             if (!result.ok) {
                 toast.add({
@@ -64,27 +64,22 @@ const ButtonTooltip = ({
             }
             toast.add({
                 type: 'success',
-                description: 'Approval status updated successfully',
+                description: `Equipment ${approvalStatus} successfully`,
                 priority: 'high'
             })
             router.refresh()
         } catch (error) {
+            console.error('Approval status error:', error)
             toast.add({
                 type: 'error',
-                description: error instanceof Error
-                    ? error.message
-                    : 'Failed to update approval status',
-                priority: 'high'
+                description: 'Something went wrong. Please try again.',
+                priority: 'high',
             })
+        } finally {
+            setApprovalHandling(false)
         }
     }
-    const handleReject = async () => {
-        if (action !== 'reject') {
-            return
-        }
-        console.log('reject')
 
-    }
     const handleUpdate = async () => {
         if (action !== 'update') {
             return
@@ -99,16 +94,20 @@ const ButtonTooltip = ({
         console.log('delete')
 
     }
-    const clickHandlerAction = action === 'approve' ? handleApprove : action === 'reject' ? handleReject : action === 'update' ? handleUpdate : handleDelete
+    const clickHandlerAction = action === 'approve' || action === 'reject' ? handleApprovalStatus : action === 'update' ? handleUpdate : handleDelete
     return (
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger
                     render={
                         <Button
+                            disabled={approvalHandling}
                             onClick={clickHandlerAction}
                             size={size} variant={variant} aria-label={aria_label}>
-                            {icon}
+                            {approvalHandling ? (
+                                <Loader2 className="animate-spin" />
+                            ) :
+                                icon}
                         </Button>
                     }
                 />
