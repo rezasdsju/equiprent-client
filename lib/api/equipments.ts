@@ -14,7 +14,7 @@ export const getEquipmentById = async (id: string) => {
 }
 
 export const getMyEquipment = async () => {
-    const api = `${BASE_URL}/my-equipments/`
+    const api = `${BASE_URL}/owner/my-equipments/`
     const res = await authFetch(api)
     return res.json()
 }
