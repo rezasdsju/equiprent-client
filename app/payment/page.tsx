@@ -12,11 +12,7 @@ import {
     ArrowRight,
 } from "lucide-react";
 
-const PaymentPage = async ({
-    searchParams,
-}: {
-    searchParams: Promise<{ bookingId: string }>;
-}) => {
+const PaymentPage = async ({ searchParams }: { searchParams: Promise<{ bookingId: string }> }) => {
     const { bookingId } = await searchParams;
     const bookingEquipment = await getBookingById(bookingId);
 
