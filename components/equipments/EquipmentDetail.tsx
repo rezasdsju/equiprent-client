@@ -3,9 +3,10 @@ import { MapPin, Heart, CalendarDays, Package, User, FileText, Mail, Phone } fro
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { IEquipment } from "@/types/equipmentTypes"
+import EquipmentBooking from "./EquipmentBooking"
 
 const EquipmentDetail = ({ equipment }: { equipment: IEquipment }) => {
-    const isAvailable = equipment.availability === "Available"
+    const isAvailable = equipment.availableQuantity >= 0
 
     return (
         <section className="px-1 py-6 sm:px-2 sm:py-10">
@@ -67,9 +68,8 @@ const EquipmentDetail = ({ equipment }: { equipment: IEquipment }) => {
 
                     {/* UI only: no functionality yet */}
                     <div className="flex flex-col gap-3 sm:flex-row">
-                        <Button size="lg" className="flex-1" disabled={!isAvailable}>
-                            Book Now
-                        </Button>
+                        <EquipmentBooking equipment={equipment}></EquipmentBooking>
+
                         <Button size="lg" variant="outline" className="flex-1 gap-2">
                             <Heart className="size-4" />
                             Add to Favorites
