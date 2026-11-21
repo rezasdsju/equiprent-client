@@ -27,3 +27,12 @@ export const deleteEquipment = async (id: string) => {
     const result = await res.json()
     return { ok: res.ok, ...result }
 }
+
+
+type ApproveStatusTypes = 'pending' | 'approved' | 'rejected'
+export const updateApprovalStatus = async (id: string, approvalStatus: ApproveStatusTypes) => {
+    const api = `${BASE_URL}/admin/all-equipment/${id}`
+    const res = await protectedMutation(api, 'PATCH', {approvalStatus})
+    const result = await res.json()
+    return { ok: res.ok, ...result }
+}
