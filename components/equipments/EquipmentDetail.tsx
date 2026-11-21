@@ -1,13 +1,52 @@
+'use client'
 import Image from "next/image"
 import { MapPin, Heart, CalendarDays, Package, User, FileText, Mail, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { IEquipment } from "@/types/equipmentTypes"
 import EquipmentBooking from "./EquipmentBooking"
+import { toast } from "../ui/toast"
+import { addToFavourite } from "@/lib/actions/favourite"
 
 const EquipmentDetail = ({ equipment }: { equipment: IEquipment }) => {
-    const isAvailable = equipment.availableQuantity >= 0
+    const isAvailable = equipment.availableQuantity > 0
 
+
+    const handleAddToFavourite = async () => {
+        if (!equipment._id) {
+            toast.add({
+                type: 'error',
+                description: 'Equipment ID is missing.',
+                priority: 'high'
+            })
+            return
+        }
+
+        try {
+            const result = await addToFavourite(equipment._id)
+
+            if (!result.ok) {
+                toast.add({
+                    type: 'error',
+                    description: result.message || 'Failed to add to favourites.',
+                    priority: 'high'
+                })
+                return
+            }
+
+            toast.add({
+                type: 'success',
+                description: 'Added to favourites successfully.',
+                priority: 'high'
+            })
+        } catch (error) {
+            toast.add({
+                type: 'error',
+                description: 'Something went wrong. Please try again.',
+                priority: 'high'
+            })
+        }
+    }
     return (
         <section className="px-1 py-6 sm:px-2 sm:py-10">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
@@ -70,7 +109,9 @@ const EquipmentDetail = ({ equipment }: { equipment: IEquipment }) => {
                     <div className="flex flex-col gap-3 sm:flex-row">
                         <EquipmentBooking equipment={equipment}></EquipmentBooking>
 
-                        <Button size="lg" variant="outline" className="flex-1 gap-2">
+                        <Button
+                            onClick={handleAddToFavourite}
+                            size="lg" variant="outline" className="flex-1 gap-2">
                             <Heart className="size-4" />
                             Add to Favorites
                         </Button>
