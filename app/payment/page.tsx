@@ -262,6 +262,8 @@ const PaymentPage = async ({ searchParams }: { searchParams: Promise<{ bookingId
                             </div>
 
                             <form action="/api/checkout_sessions" method="POST">
+                                <input type="hidden" name="bookingId" value={bookingId} />
+
                                 <button
                                     type="submit"
                                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
