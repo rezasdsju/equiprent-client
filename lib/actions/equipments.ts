@@ -49,3 +49,10 @@ export const updateEquipmentByAdmin = async (updateEquipmentData: IEquipment, id
     const result = await res.json()
     return { ok: res.ok, ...result }
 }
+
+export const deleteEquipmentByAdmin = async (id: string) => {
+    const api = `${BASE_URL}/admin/all-equipment/${id}`
+    const res = await protectedMutation(api, 'DELETE')
+    const result = await res.json()
+    return { ok: res.ok, ...result }
+}
