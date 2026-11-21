@@ -18,3 +18,12 @@ export const getMyEquipment = async () => {
     const res = await authFetch(api)
     return res.json()
 }
+
+
+
+
+export const getEquipmentsByAdminVerification = async () => {
+    const api = `${BASE_URL}/admin/all-equipment/`
+    const res = await authFetch(api)
+    return res.json()
+}
