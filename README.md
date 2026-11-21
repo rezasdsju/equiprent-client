@@ -33,6 +33,28 @@ EquipRent is an equipment rental marketplace where users can explore equipment a
 - **Protected Owner Equipment Data:** Fetches an owner's equipment using an authorization token and verifies ownership on the backend.
 - **Equipment Update and Deletion:** Allows owners to update or delete only their own equipment through protected API routes.
 - **Admin User Management:** Provides an admin dashboard with a users table, accessible only to admins through a protected API endpoint.
+## Features
+
+- **Responsive Navbar:** Navigation across the application.
+- **User Authentication:** Sign up and sign in with email and password, including profile image upload via ImgBB.
+- **User Information:** Displays the signed-in user's email and avatar in the navbar.
+- **Theme Toggle:** Switch between light and dark themes.
+- **Home Page Banner:** Hero section with a title, description, and call-to-action buttons.
+- **All Equipment Page:** Displays approved equipment in a card layout.
+- **Search:** Search equipment by name or location.
+- **Filters:** Equipment category, rental type, price range, and availability status.
+- **Sorting:** Price (low to high), price (high to low), and recently added.
+- **Equipment Cards:** Display equipment image, name, category, rental price, rental type, location, and availability status.
+- **Equipment Details Page:** Private route, available to authenticated users only.
+- **Role-Based Dashboards:** Separate dashboard areas for customers, owners, and admins based on user roles.
+- **Owner Equipment Management:** Allows authenticated owners to add, view, update, and delete their own equipment.
+- **Equipment Creation Authorization:** Restricts equipment creation to authenticated owners and assigns owner information from the authenticated user.
+- **Protected Owner Equipment Data:** Fetches an owner's equipment using an authorization token and verifies ownership on the backend.
+- **Equipment Update and Deletion:** Allows owners to update or delete only their own equipment through protected API routes.
+- **Admin User Management:** Provides an admin dashboard with a users table, accessible only to admins through a protected API endpoint.
+- **Admin Equipment Management:** Allows admins to view and manage all equipment through a dedicated dashboard.
+- **Equipment Approval and Rejection:** Allows admins to approve or reject equipment submissions by updating their approval status.
+- **Admin Equipment Update and Deletion:** Allows admins to update or delete any equipment through protected API routes.
 
 
 ## Technologies
