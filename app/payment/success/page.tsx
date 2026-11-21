@@ -1,7 +1,9 @@
-
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { CheckCircle2, ArrowRight, Mail } from 'lucide-react'
 import { checkoutVerify } from '@/lib/actions/payments'
 import { stripe } from '@/lib/stripe'
-import { redirect } from 'next/navigation'
+import { Button } from '@/components/ui/button'
 
 export default async function Success({
     searchParams,
@@ -29,12 +31,40 @@ export default async function Success({
         await checkoutVerify(session_id)
 
         return (
-            <section id="success">
-                <p>
-                    We appreciate your business! A confirmation email will be sent to{' '}
-                    {customer_email}. If you have any questions, please email{' '}
-                    <a href="mailto:orders@example.com">orders@example.com</a>.
-                </p>
+            <section className="flex min-h-[70vh] items-center justify-center px-4 py-10">
+                <div className="w-full max-w-md rounded-2xl border bg-card p-6 text-center shadow-sm sm:p-8">
+                    <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400">
+                        <CheckCircle2 className="size-9" />
+                    </div>
+
+                    <h1 className="text-2xl font-bold sm:text-3xl">Payment Successful</h1>
+                    <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+                        Thank you! Your rental booking has been confirmed.
+                    </p>
+
+                    {customer_email && (
+                        <div className="mt-5 flex items-start gap-3 rounded-xl bg-muted/60 p-3 text-left">
+                            <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
+                            <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                                A confirmation will be sent to{' '}
+                                <span className="break-all font-medium text-foreground">
+                                    {customer_email}
+                                </span>
+                                .
+                            </p>
+                        </div>
+                    )}
+
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                        <Button render={<Link href="/dashboard/customer/my-rentals" />}>
+                            View My Rentals
+                            <ArrowRight className="size-4" />
+                        </Button>
+                        <Button variant="outline" render={<Link href="/" />}>
+                            Back to Home
+                        </Button>
+                    </div>
+                </div>
             </section>
         )
     }
