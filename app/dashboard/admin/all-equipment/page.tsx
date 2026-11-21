@@ -1,12 +1,12 @@
 import AllEquipmentTable from "@/app/components/all-equipment/AllEquipmentTable";
-import { getEquipments } from "@/lib/api/equipments";
+import { getEquipmentsByAdminVerification } from "@/lib/api/equipments";
 
 
 
 
 
 const AdminDashboardAllEquipmentPage = async () => {
-    const equipments = await getEquipments()
+    const equipments = await getEquipmentsByAdminVerification()
     return (
         <div>
             <AllEquipmentTable equipments={equipments}></AllEquipmentTable>
