@@ -1,7 +1,7 @@
 
 
 import Image from "next/image"
-import { Check, X, Pencil, Trash2 } from "lucide-react"
+import { Check, X, Trash2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import {
     Table,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table"
 import type { IEquipment } from "@/types/equipmentTypes"
 import ButtonTooltip from "./ButtonTooltip"
+import { UpdateEquipment } from "./UpdateEquipment"
 
 const statusStyles: Record<string, string> = {
     pending: "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300",
@@ -100,8 +101,8 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
                                             <div className="flex justify-end gap-1.5">
                                                 {status !== "approved" && (
                                                     <ButtonTooltip
-                                                    equipment={equipment}
-                                                    action={`approve`}
+                                                        equipment={equipment}
+                                                        action={`approve`}
                                                         size="icon-sm"
                                                         variant="outline"
                                                         aria_label="Approve"
@@ -112,8 +113,8 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
 
                                                 {status !== "rejected" && (
                                                     <ButtonTooltip
-                                                                 equipment={equipment}
-                                                    action={`reject`}
+                                                        equipment={equipment}
+                                                        action={`reject`}
                                                         size="icon-sm"
                                                         variant="outline"
                                                         aria_label="Reject"
@@ -122,18 +123,10 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
                                                     />
                                                 )}
 
-                                                <ButtonTooltip
-                                                             equipment={equipment}
-                                                    action={`update`}
-                                                    size="icon-sm"
-                                                    variant="outline"
-                                                    aria_label="Update"
-                                                    content="Update Equipment"
-                                                    icon={<Pencil className="size-4" />}
-                                                />
+                                                <UpdateEquipment equipment={equipment}></UpdateEquipment>
 
                                                 <ButtonTooltip
-                                                             equipment={equipment}
+                                                    equipment={equipment}
                                                     action={`delete`}
                                                     size="icon-sm"
                                                     variant="destructive"
