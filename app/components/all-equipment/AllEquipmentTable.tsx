@@ -1,7 +1,8 @@
+
+
 import Image from "next/image"
 import { Check, X, Pencil, Trash2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
     Table,
     TableBody,
@@ -11,6 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import type { IEquipment } from "@/types/equipmentTypes"
+import ButtonTooltip from "./ButtonTooltip"
 
 const statusStyles: Record<string, string> = {
     pending: "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300",
@@ -52,40 +54,40 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
                                 </TableCell>
                             </TableRow>
                         ) : (
-                            equipments.map((item) => {
-                                const status = item.approvalStatus ?? "pending"
+                            equipments.map((equipment) => {
+                                const status = equipment.approvalStatus ?? "pending"
                                 return (
-                                    <TableRow key={item._id}>
+                                    <TableRow key={equipment._id}>
                                         <TableCell>
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex equipments-center gap-3">
                                                 <div className="relative size-12 shrink-0 overflow-hidden rounded-lg border bg-muted">
                                                     <Image
-                                                        src={item.image}
-                                                        alt={item.name}
+                                                        src={equipment.image}
+                                                        alt={equipment.name}
                                                         fill
                                                         sizes="48px"
                                                         className="object-cover"
                                                     />
                                                 </div>
                                                 <div className="min-w-0">
-                                                    <p className="line-clamp-1 font-medium">{item.name}</p>
+                                                    <p className="line-clamp-1 font-medium">{equipment.name}</p>
                                                     <p className="text-xs text-muted-foreground">
-                                                        {item.location}
+                                                        {equipment.location}
                                                     </p>
                                                 </div>
                                             </div>
                                         </TableCell>
 
-                                        <TableCell className="whitespace-nowrap">{item.category}</TableCell>
+                                        <TableCell className="whitespace-nowrap">{equipment.category}</TableCell>
 
                                         <TableCell className="whitespace-nowrap">
-                                            ${item.rentalPrice.toLocaleString()}
+                                            ${equipment.rentalPrice.toLocaleString()}
                                             <span className="text-xs text-muted-foreground">
-                                                {" "}/ {item.rentalType}
+                                                {" "}/ {equipment.rentalType}
                                             </span>
                                         </TableCell>
 
-                                        <TableCell>{item.availableQuantity}</TableCell>
+                                        <TableCell>{equipment.availableQuantity}</TableCell>
 
                                         <TableCell>
                                             <Badge variant="secondary" className={`capitalize ${statusStyles[status]}`}>
@@ -94,20 +96,53 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
                                         </TableCell>
 
                                         <TableCell>
+
                                             <div className="flex justify-end gap-1.5">
-                                                <Button size="icon-sm" variant="outline" aria-label="Approve">
-                                                    <Check className="size-4" />
-                                                </Button>
-                                                <Button size="icon-sm" variant="outline" aria-label="Reject">
-                                                    <X className="size-4" />
-                                                </Button>
-                                                <Button size="icon-sm" variant="outline" aria-label="Update">
-                                                    <Pencil className="size-4" />
-                                                </Button>
-                                                <Button size="icon-sm" variant="destructive" aria-label="Delete">
-                                                    <Trash2 className="size-4" />
-                                                </Button>
+                                                {status !== "approved" && (
+                                                    <ButtonTooltip
+                                                    equipment={equipment}
+                                                    action={`approve`}
+                                                        size="icon-sm"
+                                                        variant="outline"
+                                                        aria_label="Approve"
+                                                        content="Approve Equipment"
+                                                        icon={<Check className="size-4" />}
+                                                    />
+                                                )}
+
+                                                {status !== "rejected" && (
+                                                    <ButtonTooltip
+                                                                 equipment={equipment}
+                                                    action={`reject`}
+                                                        size="icon-sm"
+                                                        variant="outline"
+                                                        aria_label="Reject"
+                                                        content="Reject Equipment"
+                                                        icon={<X className="size-4" />}
+                                                    />
+                                                )}
+
+                                                <ButtonTooltip
+                                                             equipment={equipment}
+                                                    action={`update`}
+                                                    size="icon-sm"
+                                                    variant="outline"
+                                                    aria_label="Update"
+                                                    content="Update Equipment"
+                                                    icon={<Pencil className="size-4" />}
+                                                />
+
+                                                <ButtonTooltip
+                                                             equipment={equipment}
+                                                    action={`delete`}
+                                                    size="icon-sm"
+                                                    variant="destructive"
+                                                    aria_label="Delete"
+                                                    content="Delete Equipment"
+                                                    icon={<Trash2 className="size-4" />}
+                                                />
                                             </div>
+
                                         </TableCell>
                                     </TableRow>
                                 )
