@@ -1,4 +1,4 @@
-import MyEquipment from "@/app/components/my-equipments/MyEquipment";
+import MyEquipment from "@/app/components/owner/my-equipments/MyEquipment";
 import { getMyEquipment } from "@/lib/api/equipments";
 import { IEquipment } from "@/types/equipmentTypes";
 

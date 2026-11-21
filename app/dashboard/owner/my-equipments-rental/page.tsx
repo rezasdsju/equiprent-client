@@ -1,4 +1,4 @@
-import MyEquipmentRental from "@/app/components/my-equipments/MyEquipmentRental";
+import MyEquipmentRental from "@/app/components/owner/my-equipments/MyEquipmentRental";
 
 
 

@@ -1,4 +1,4 @@
-import AllEquipmentTable from "@/app/components/all-equipment/AllEquipmentTable";
+import AllEquipmentTable from "@/app/components/admin/all-equipment/AllEquipmentTable";
 import { getEquipmentsByAdminVerification } from "@/lib/api/equipments";
 
 
