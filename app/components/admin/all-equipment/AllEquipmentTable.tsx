@@ -1,7 +1,7 @@
 
 
 import Image from "next/image"
-import { Check, X, Trash2 } from "lucide-react"
+import { Check, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import {
     Table,
@@ -14,6 +14,7 @@ import {
 import type { IEquipment } from "@/types/equipmentTypes"
 import ButtonTooltip from "./ButtonTooltip"
 import { UpdateEquipment } from "./UpdateEquipment"
+import { DeleteEquipment } from "./DeleteEquipment"
 
 const statusStyles: Record<string, string> = {
     pending: "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300",
@@ -125,15 +126,7 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
 
                                                 <UpdateEquipment equipment={equipment}></UpdateEquipment>
 
-                                                <ButtonTooltip
-                                                    equipment={equipment}
-                                                    action={`delete`}
-                                                    size="icon-sm"
-                                                    variant="destructive"
-                                                    aria_label="Delete"
-                                                    content="Delete Equipment"
-                                                    icon={<Trash2 className="size-4" />}
-                                                />
+                                                <DeleteEquipment equipment={equipment}></DeleteEquipment>
                                             </div>
 
                                         </TableCell>
