@@ -1,12 +1,15 @@
 'use client'
 import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/toast"
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { updateApprovalStatus } from "@/lib/actions/equipments"
 import { IEquipment } from "@/types/equipmentTypes"
+import { useRouter } from "next/navigation"
 import type { ReactNode } from "react"
 
 interface ButtonTooltipProps {
@@ -31,11 +34,49 @@ const ButtonTooltip = ({
     action
 }: ButtonTooltipProps) => {
 
+
+
+    const router = useRouter()
     const handleApprove = async () => {
         if (action !== 'approve') {
             return
         }
-        console.log('approve')
+        // console.log('approve')
+        if (!equipment._id) {
+            toast.add({
+                type: 'error',
+                description: 'Does not exists equipment',
+                priority: 'high'
+            })
+            return
+        }
+
+        try {
+            const result = await updateApprovalStatus(equipment._id, 'approved')
+            // console.log(result)
+            if (!result.ok) {
+                toast.add({
+                    type: 'error',
+                    description: result.message || 'Failed to update approval status',
+                    priority: 'high'
+                })
+                return
+            }
+            toast.add({
+                type: 'success',
+                description: 'Approval status updated successfully',
+                priority: 'high'
+            })
+            router.refresh()
+        } catch (error) {
+            toast.add({
+                type: 'error',
+                description: error instanceof Error
+                    ? error.message
+                    : 'Failed to update approval status',
+                priority: 'high'
+            })
+        }
     }
     const handleReject = async () => {
         if (action !== 'reject') {
