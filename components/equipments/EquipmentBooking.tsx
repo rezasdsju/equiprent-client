@@ -20,6 +20,7 @@ import { toast } from "../ui/toast"
 import { IAddBooking } from "@/types/bookingTypes"
 import { bookEquipment } from "@/lib/actions/bookings"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
     const isAvailable = equipment.availableQuantity > 0
@@ -29,6 +30,7 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
     const [rentalStartDate, setRentalStartDate] = useState<string>("")
     const [rentalEndDate, setRentalEndDate] = useState<string>("")
     const [quantity, setQuantity] = useState<number>(1)
+    const [open, setOpen] = useState(false)
     const start = new Date(rentalStartDate)
     const end = new Date(rentalEndDate)
 
@@ -56,6 +58,14 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
             })
             return
         }
+        if (end < start) {
+            toast.add({
+                type: "error",
+                description: "End date cannot be before start date",
+                priority: "high",
+            })
+            return
+        }
         const bookingData: IAddBooking = {
             equipmentId: equipment._id!,
             startDate: formData.get("startDate") as string,
@@ -80,10 +90,10 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
             }
             toast.add({
                 type: 'success',
-                description: 'Booking created successfully',
+                description: 'Booking created successfully. Redirecting to the checkout page...',
                 priority: 'high',
             })
-            router.refresh()
+            router.push(`/payment?bookingId=${result.insertedId}`)
         } catch (error) {
             console.error('Booking error:', error)
             toast.add({
@@ -99,7 +109,17 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
     }
 
     return (
-        <Dialog>
+        <Dialog
+            open={open}
+            onOpenChange={(value) => {
+                setOpen(value)
+                if (!value) {
+                    setRentalStartDate("")
+                    setRentalEndDate("")
+                    setQuantity(1)
+                }
+            }}
+        >
             <DialogTrigger
                 render={
                     <Button size="lg" className="flex-1" disabled={!isAvailable}>
@@ -129,6 +149,7 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
                                     name="startDate"
                                     type="date"
                                     min={today}
+                                    max={rentalEndDate || undefined}
                                     required />
                             </Field>
 
@@ -141,8 +162,9 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
                                     id="booking-end"
                                     name="endDate"
                                     type="date"
-                                    min={today}
-                                    required />
+                                    min={rentalStartDate || today}
+                                    required
+                                />
                             </Field>
 
                             <Field>
@@ -229,9 +251,14 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
                                 </Button>
                             }
                         />
+
+
+
                         <Button
                             disabled={isBooking}
-                            type="submit">{isBooking ? 'Confirming...' : 'Confirm Booking'}</Button>
+                            type="submit">{isBooking ? 'Confirming...' : 'Confirm Booking'}
+                        </Button>
+
                     </DialogFooter>
                 </form>
             </DialogContent>
