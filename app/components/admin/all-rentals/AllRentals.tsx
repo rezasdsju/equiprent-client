@@ -1,3 +1,4 @@
+'use client'
 
 import {
     Table,
@@ -24,15 +25,8 @@ import {
     CreditCard,
 } from "lucide-react"
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
 import type { IBooking } from "@/types/bookingTypes"
+import UpdateBookingStatus from "./UpdateBookingStatus"
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -94,7 +88,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                 </p>
             </div>
 
-            {/* Summary */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -133,7 +126,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                 </Card>
             </div>
 
-            {/* Empty State */}
             {rentals.length === 0 ? (
                 <Card>
                     <CardContent className="flex flex-col items-center justify-center py-16 text-center">
@@ -148,7 +140,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                 </Card>
             ) : (
                 <>
-                    {/* Desktop Table */}
                     <Card className="hidden lg:block">
                         <CardHeader>
                             <CardTitle>Rental Records</CardTitle>
@@ -239,22 +230,14 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                                                     </Badge>
                                                 </TableCell>
 
-                                                {/* Actions */}
                                                 <TableCell>
-                                                    {rental.bookingStatus === "pending" && (
-                                                        <Select>
-                                                            <SelectTrigger className="w-32">
-                                                                <SelectValue placeholder="Change Status" />
-                                                            </SelectTrigger>
-                                                            <SelectContent>
-                                                                <SelectItem value="confirmed">
-                                                                    Confirmed
-                                                                </SelectItem>
-                                                                <SelectItem value="cancelled">
-                                                                    Cancelled
-                                                                </SelectItem>
-                                                            </SelectContent>
-                                                        </Select>
+                                                    {rental.bookingStatus === "pending" ||
+                                                    rental.bookingStatus === "confirmed" ? (
+                                                        <UpdateBookingStatus rental={rental} />
+                                                    ) : (
+                                                        <span className="text-sm text-muted-foreground">
+                                                            —
+                                                        </span>
                                                     )}
                                                 </TableCell>
                                             </TableRow>
@@ -265,7 +248,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                         </CardContent>
                     </Card>
 
-                    {/* Mobile & Tablet Cards */}
                     <div className="grid gap-4 lg:hidden">
                         {rentals.map((rental) => (
                             <Card key={rental._id}>
@@ -288,7 +270,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
 
                                 <CardContent className="space-y-4">
                                     <div className="grid gap-3 sm:grid-cols-2">
-                                        {/* Customer */}
                                         <div className="flex items-start gap-2">
                                             <Users className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                                             <div className="min-w-0">
@@ -304,7 +285,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                                             </div>
                                         </div>
 
-                                        {/* Owner */}
                                         <div className="flex items-start gap-2">
                                             <Users className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                                             <div className="min-w-0">
@@ -321,7 +301,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                                         </div>
                                     </div>
 
-                                    {/* Rental Period */}
                                     <div className="flex items-start gap-2">
                                         <CalendarDays className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                                         <div>
@@ -337,7 +316,6 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                                         </div>
                                     </div>
 
-                                    {/* Amount & Payment */}
                                     <div className="flex items-center justify-between gap-3 border-t pt-3">
                                         <div className="min-w-0">
                                             <p className="text-xs text-muted-foreground">
@@ -359,26 +337,13 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                                         </div>
                                     </div>
 
-                                    {/* Actions */}
-                                    {rental.bookingStatus === "pending" && (
+                                    {(rental.bookingStatus === "pending" ||
+                                        rental.bookingStatus === "confirmed") && (
                                         <div className="space-y-2 border-t pt-3">
                                             <p className="text-xs text-muted-foreground">
                                                 Change Booking Status
                                             </p>
-
-                                            <Select>
-                                                <SelectTrigger className="w-full">
-                                                    <SelectValue placeholder="Select Status" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="confirmed">
-                                                        Confirmed
-                                                    </SelectItem>
-                                                    <SelectItem value="cancelled">
-                                                        Cancelled
-                                                    </SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                            <UpdateBookingStatus rental={rental} />
                                         </div>
                                     )}
                                 </CardContent>
