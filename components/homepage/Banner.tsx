@@ -54,7 +54,7 @@ const Banner = () => {
 
                     className="flex flex-wrap items-center gap-3">
                     <Button size="lg">
-                        <Link href="/equipment">Browse Equipment</Link>
+                        <Link href="/all-equipments">Browse Equipment</Link>
                     </Button>
                     <Button
 
@@ -62,7 +62,7 @@ const Banner = () => {
                         variant="outline"
                         className="border-white/70 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
                     >
-                        <Link href="/dashboard/add-equipment">List Your Equipment</Link>
+                        <Link href="/dashboard/owner/new">List Your Equipment</Link>
                     </Button>
                 </motion.div>
             </div>
