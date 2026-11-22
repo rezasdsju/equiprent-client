@@ -90,12 +90,12 @@ const UpdateBookingStatus = ({ rental }: { rental: IBooking }) => {
             <SelectContent>
                 {bookingStatus === "pending" && (
                     <SelectItem value="confirmed">
-                        Confirmed
+                        Confirm
                     </SelectItem>
                 )}
 
                 <SelectItem value="canceled">
-                    Cancelled
+                    Cancel
                 </SelectItem>
             </SelectContent>
         </Select>
