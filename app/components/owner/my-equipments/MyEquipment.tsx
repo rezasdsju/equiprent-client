@@ -48,7 +48,7 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                             {equipment.category}
                                         </td>
                                         <td className="px-5 py-4">
-                                            ৳{equipment.rentalPrice} / {equipment.rentalType}
+                                            ${equipment.rentalPrice} / {equipment.rentalType}
                                         </td>
                                         <td className="px-5 py-4">
                                             {equipment.availableQuantity}
