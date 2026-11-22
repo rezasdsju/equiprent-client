@@ -8,3 +8,9 @@ export const getFavouriteByEquipmentId = async (equipmentId: string) => {
     const res = await authFetch(api)
     return res.json()
 }
+
+export const getFavouritesForCustomer = async () => {
+    const api = `${BASE_URL}/customer/favourites`
+    const res = await authFetch(api)
+    return res.json()
+}
