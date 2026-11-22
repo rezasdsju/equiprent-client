@@ -28,11 +28,11 @@ const FeaturedEquipment = ({
     if (isPending || !equipmentId) return;
 
     if (!session?.user) {
-      router.push(`/sign-in?redirectTo=/equipment/${equipmentId}`);
+      router.push(`/sign-in?redirectTo=/all-equipments/${equipmentId}`);
       return;
     }
 
-    router.push(`/equipment/${equipmentId}`);
+    router.push(`/all-equipments/${equipmentId}`);
   };
 
   return (
