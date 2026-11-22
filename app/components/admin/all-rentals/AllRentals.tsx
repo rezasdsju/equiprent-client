@@ -149,8 +149,8 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                         </CardHeader>
 
                         <CardContent>
-                            <div className="overflow-x-auto">
-                                <Table>
+                            <div className="min-w-0">
+                                <Table className="min-w-275">
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead>Customer</TableHead>
@@ -232,7 +232,7 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
 
                                                 <TableCell>
                                                     {rental.bookingStatus === "pending" ||
-                                                    rental.bookingStatus === "confirmed" ? (
+                                                        rental.bookingStatus === "confirmed" ? (
                                                         <UpdateBookingStatus rental={rental} />
                                                     ) : (
                                                         <span className="text-sm text-muted-foreground">
@@ -339,13 +339,13 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
 
                                     {(rental.bookingStatus === "pending" ||
                                         rental.bookingStatus === "confirmed") && (
-                                        <div className="space-y-2 border-t pt-3">
-                                            <p className="text-xs text-muted-foreground">
-                                                Change Booking Status
-                                            </p>
-                                            <UpdateBookingStatus rental={rental} />
-                                        </div>
-                                    )}
+                                            <div className="space-y-2 border-t pt-3">
+                                                <p className="text-xs text-muted-foreground">
+                                                    Change Booking Status
+                                                </p>
+                                                <UpdateBookingStatus rental={rental} />
+                                            </div>
+                                        )}
                                 </CardContent>
                             </Card>
                         ))}
