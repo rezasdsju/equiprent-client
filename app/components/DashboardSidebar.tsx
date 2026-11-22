@@ -53,7 +53,7 @@ export default function DashboardSideBar() {
   const role = session?.user?.role || 'customer'
   return (
     <Sidebar collapsible="icon" >
-      <SidebarHeader />
+      <SidebarHeader className="px-4 pt-6 pb-4" />
       <SidebarContent>
         <SidebarGroup />
         <SidebarGroup />
