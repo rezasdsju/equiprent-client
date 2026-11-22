@@ -106,7 +106,7 @@ const CategoriesSection = () => {
           {equipmentCategories.map((category) => (
             <Link
               key={category.id}
-              href={`/equipment?category=${category.slug}`}
+              href={`/all-equipments?category=${category.name}`}
               className="group overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="relative h-52 overflow-hidden">
