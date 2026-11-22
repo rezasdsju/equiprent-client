@@ -14,7 +14,7 @@ import LightFooterLogo from "@/app/assets/light-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="site-footer border-t bg-muted/30">
       <div className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
 

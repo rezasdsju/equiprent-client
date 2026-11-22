@@ -131,3 +131,20 @@
 .max-w-7xl [data-slot="sidebar-container"] {
   position: absolute !important;
 }
+
+/*
+ * Dashboard footer fix.
+ *
+ * The sidebar is `fixed` and one viewport tall, so it used to sit on top of the
+ * footer on short dashboard pages. The footer still lives in the root layout so
+ * it shows on every page; when the dashboard sidebar is expanded we push the
+ * footer content past it instead of hiding it.
+ *
+ * 16rem = SIDEBAR_WIDTH in components/ui/sidebar.tsx.
+ * Collapsed (offcanvas) sidebar = no offset, so the footer stays full width.
+ */
+@media (min-width: 48rem) {
+  body:has([data-slot="sidebar"][data-state="expanded"]) .site-footer {
+    padding-inline-start: 16rem;
+  }
+}
