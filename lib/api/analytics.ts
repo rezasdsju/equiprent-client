@@ -8,3 +8,11 @@ export const getAnalyticsForAdminDashboard = async () => {
     const res = await authFetch(api)
     return res.json()
 }
+
+
+// Owner
+export const getAnalyticsForOwnerDashboard = async () => {
+    const api = `${BASE_URL}/owner/analytics`
+    const res = await authFetch(api)
+    return res.json()
+}
