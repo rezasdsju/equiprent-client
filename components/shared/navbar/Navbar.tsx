@@ -70,7 +70,13 @@ const Navbar = () => {
                         ) : (
                             user && (
                                 <Link
-                                    href="/dashboard"
+                                    href={
+                                        user.role === "admin"
+                                            ? "/dashboard/admin"
+                                            : user.role === "owner"
+                                                ? "/dashboard/owner"
+                                                : "/dashboard/customer"
+                                    }
                                     className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Dashboard
