@@ -1,4 +1,4 @@
-
+import { Eye, Trash2 } from "lucide-react"
 import {
     Table,
     TableBody,
@@ -19,6 +19,7 @@ import {
 
 import { IUser } from "@/types/userTypes"
 import UserRole from "./UserRole"
+import DeleteUser from "./DeleteUser"
 
 
 
@@ -116,14 +117,10 @@ const UsersTable = ({ users }: { users: IUser[] }) => {
                                         <TableCell>
                                             <UserRole user={user}></UserRole>
                                         </TableCell>
-
                                         <TableCell className="text-right">
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                            >
-                                                Manage
-                                            </Button>
+                                            <div className="flex items-center justify-end">
+                                                <DeleteUser user={user} />
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}
