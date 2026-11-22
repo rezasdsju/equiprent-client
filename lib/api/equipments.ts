@@ -14,6 +14,14 @@ export const getSixApprovedEquipments = async () => {
     })
     return res.json()
 }
+
+export const getFourRecentlyAddedEquipments = async () => {
+    const res = await fetch(`${BASE_URL}/recently-added-equipments`, {
+        cache: 'no-store'
+    })
+    return res.json()
+}
+
 export const getEquipmentById = async (id: string) => {
     const api = `${BASE_URL}/all-equipments/${id}`
     const res = await authFetch(api)
