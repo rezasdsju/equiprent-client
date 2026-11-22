@@ -2,63 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowUpRight } from "lucide-react";
+import type { IEquipment } from "@/types/equipmentTypes";
+import { getFourRecentlyAddedEquipments } from "@/lib/api/equipments";
 
-
-
-
-export interface IRecentEquipment {
-    id: string;
-    name: string;
-    category: string;
-    location: string;
-    pricePerDay: number;
-    image: string;
-}
-
-export const recentlyAddedEquipment: IRecentEquipment[] = [
-    {
-        id: "recent-001",
-        name: "Professional DSLR Camera",
-        category: "Photography Equipment",
-        location: "Dhaka",
-        pricePerDay: 2500,
-        image:
-            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-        id: "recent-002",
-        name: "Mini Excavator",
-        category: "Construction Equipment",
-        location: "Chattogram",
-        pricePerDay: 8500,
-        image:
-            "https://images.unsplash.com/photo-1580901368919-7738efb0f87e?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-        id: "recent-003",
-        name: "Portable Generator",
-        category: "Electronics",
-        location: "Gazipur",
-        pricePerDay: 1800,
-        image:
-            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-        id: "recent-004",
-        name: "Agricultural Tractor",
-        category: "Agriculture Equipment",
-        location: "Rajshahi",
-        pricePerDay: 5000,
-        image:
-            "https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=800&q=80",
-    },
-];
-
-
-const RecentlyAddedEquipment = () => {
+const RecentlyAddedEquipment = async () => {
+    const recentlyAddedEquipment: IEquipment[] = await getFourRecentlyAddedEquipments()
     return (
-        <section className="py-16 md:py-20 max-w-7xl mx-auto">
-            <div className=" mx-auto px-1">
+        <section className="mx-auto max-w-7xl px-4 py-16 md:py-20">
+            <div>
                 {/* Section Heading */}
                 <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
                     <div>
@@ -76,7 +27,7 @@ const RecentlyAddedEquipment = () => {
                     </div>
 
                     <Link
-                        href="/equipment"
+                        href="/all-equipments"
                         className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                     >
                         View All Equipment
@@ -85,10 +36,10 @@ const RecentlyAddedEquipment = () => {
                 </div>
 
                 {/* Equipment Cards */}
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {recentlyAddedEquipment.map((equipment) => (
                         <div
-                            key={equipment.id}
+                            key={equipment._id}
                             className="group overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                         >
                             {/* Equipment Image */}
@@ -97,7 +48,7 @@ const RecentlyAddedEquipment = () => {
                                     src={equipment.image}
                                     alt={equipment.name}
                                     fill
-                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                             </div>
@@ -120,15 +71,15 @@ const RecentlyAddedEquipment = () => {
                                 <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">
                                     <div>
                                         <span className="text-lg font-bold">
-                                            ৳{equipment.pricePerDay.toLocaleString("en-BD")}
+                                            ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                                         </span>
                                         <span className="text-xs text-muted-foreground">
-                                            /day
+                                            /{equipment.rentalType.toLowerCase()}
                                         </span>
                                     </div>
 
                                     <Link
-                                        href={`/equipment/${equipment.id}`}
+                                        href={`/all-equipments/${equipment._id}`}
                                         className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
                                     >
                                         View Details
