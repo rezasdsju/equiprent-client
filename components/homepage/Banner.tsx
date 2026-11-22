@@ -4,9 +4,16 @@ import Link from "next/link"
 import BannerImage from "@/app/assets/banner-1.jpg"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion";
+import { useState } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
 const Banner = () => {
+    const [imageLoaded, setImageLoaded] = useState(false)
     return (
         <section className="relative min-h-100 w-full overflow-hidden sm:min-h-125 lg:min-h-150 max-w-7xl mx-auto">
+            {!imageLoaded && (
+                <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
+            )}
+
             <Image
                 src={BannerImage}
                 alt="Construction and power equipment available for rent on EquipRent"
@@ -14,6 +21,7 @@ const Banner = () => {
                 sizes="100vw"
                 className="object-cover"
                 priority
+                onLoad={() => setImageLoaded(true)}
             />
 
             {/* Dark overlay: makes white text readable on any image */}
