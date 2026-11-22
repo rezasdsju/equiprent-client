@@ -7,6 +7,13 @@ export const getEquipments = async (query = "") => {
     })
     return res.json()
 }
+
+export const getSixApprovedEquipments = async () => {
+    const res = await fetch(`${BASE_URL}/featured-equipments`, {
+        cache: 'no-store'
+    })
+    return res.json()
+}
 export const getEquipmentById = async (id: string) => {
     const api = `${BASE_URL}/all-equipments/${id}`
     const res = await authFetch(api)
