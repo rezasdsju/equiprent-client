@@ -43,7 +43,7 @@ const menuItemsByRole = {
     { name: "Dashboard", url: "/dashboard/admin", icon: LayoutDashboard },
     { name: "All Users", url: "/dashboard/admin/users", icon: Users },
     { name: "All Equipment", url: "/dashboard/admin/all-equipment", icon: Settings },
-    { name: "All Rentals", url: "/dashboard/admin/rentals", icon: ClipboardList },
+    { name: "All Rentals", url: "/dashboard/admin/all-rentals", icon: ClipboardList },
     { name: "My Profile", url: "/dashboard/admin/profile", icon: User },
   ],
 }
