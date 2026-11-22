@@ -11,12 +11,12 @@ export default function Page() {
   return (
     <div>
       <Banner></Banner>
-      <FetchFeaturesEquipment></FetchFeaturesEquipment>
+      {/* <FetchFeaturesEquipment></FetchFeaturesEquipment> */}
       <CategoriesSection></CategoriesSection>
       <WhyChooseUs></WhyChooseUs>
       <CustomerReviews></CustomerReviews>
       <HowItWorks></HowItWorks>
-      <RecentlyAddedEquipment></RecentlyAddedEquipment>
+      {/* <RecentlyAddedEquipment></RecentlyAddedEquipment> */}
     </div>
   )
 }
