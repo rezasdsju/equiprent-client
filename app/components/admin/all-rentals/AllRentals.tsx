@@ -148,7 +148,7 @@ const AllRentals = ({ rentals }: { rentals: IBooking[] }) => {
                             </CardDescription>
                         </CardHeader>
 
-                        <CardContent>
+                        <CardContent className="min-w-0">
                             <div className="min-w-0">
                                 <Table className="min-w-275">
                                     <TableHeader>
