@@ -7,4 +7,6 @@ export interface IUser {
     role?: 'customer' | 'owner' | 'admin'
     createdAt: string
     updatedAt: string
+    phone?: string
+    address?: string
 }
