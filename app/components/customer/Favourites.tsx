@@ -12,6 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import type { IFavouriteWithEquipment } from "@/types/favouriteTypes"
+import DeleteFavouriteDialog from "./DeleteFavouriteDialog"
 
 const availableStyle =
     "bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300"
@@ -90,10 +91,7 @@ const Favourites = ({ favourites }: { favourites: IFavouriteWithEquipment[] }) =
                                                 <Eye className="size-4" />
                                                 View
                                             </Button>
-                                            <Button size="sm" variant="destructive">
-                                                <Trash2 className="size-4" />
-                                                Remove
-                                            </Button>
+                                            <DeleteFavouriteDialog favourite={fav} />
                                         </div>
                                     </div>
                                 </div>
@@ -172,10 +170,7 @@ const Favourites = ({ favourites }: { favourites: IFavouriteWithEquipment[] }) =
                                                         <Eye className="size-4" />
                                                         View Details
                                                     </Button>
-                                                    <Button size="sm" variant="destructive">
-                                                        <Trash2 className="size-4" />
-                                                        Remove
-                                                    </Button>
+                                                    <DeleteFavouriteDialog favourite={fav} />
                                                 </div>
                                             </TableCell>
                                         </TableRow>
