@@ -15,7 +15,7 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 import { useState } from "react";
-import { LuUser, LuCalendarPlus, LuCalendarCog, LuCalendarCheck, LuLogOut } from "react-icons/lu"
+import { LuLogOut } from "react-icons/lu"
 
 import {
     Tooltip,
@@ -30,11 +30,17 @@ import useSignOut from "@/hooks/useSignOut";
 interface IUser {
     name: string,
     email: string,
+    role?: string | null,
     image?: string | null | undefined
 }
 const ProfileMenuPopOver = ({ user }: { user: IUser }) => {
     const [open, setOpen] = useState(false)
     const {handleSignOut, isSigningOut} = useSignOut()
+    const dashboardHref = user.role === "admin"
+        ? "/dashboard/admin"
+        : user.role === "owner"
+            ? "/dashboard/owner"
+            : "/dashboard/customer"
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -88,7 +94,29 @@ const ProfileMenuPopOver = ({ user }: { user: IUser }) => {
                     </PopoverDescription>
                 </PopoverHeader>
 
-
+                <nav aria-label="Mobile navigation" className="mb-2 space-y-1 border-b border-border pb-3 sm:hidden">
+                    <Link
+                        href="/"
+                        onClick={() => setOpen(false)}
+                        className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        href="/all-equipments"
+                        onClick={() => setOpen(false)}
+                        className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
+                    >
+                        All Equipment
+                    </Link>
+                    <Link
+                        href={dashboardHref}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
+                    >
+                        Dashboard
+                    </Link>
+                </nav>
 
                 <div className="mt-2 border-t border-border pt-2">
                     <button
