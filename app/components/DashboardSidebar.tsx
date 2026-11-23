@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sidebar"
 import { authClient } from "@/lib/auth-client"
 import {
+  CalendarCheck,
   ClipboardList,
   FileText,
   Heart,
@@ -30,7 +31,9 @@ const menuItemsByRole = {
     { name: "Browse Equipment", url: "/all-equipments", icon: Search },
     { name: "My Rentals", url: "/dashboard/customer/my-rentals", icon: FileText },
     { name: "Favorites", url: "/dashboard/customer/my-favourites", icon: Heart },
-    { name: "My Profile", url: "/dashboard/customer/profile", icon: User },
+    { name: "My Bookings", url: "/dashboard/customer/my-bookings", icon: CalendarCheck },
+    { name: "My Profile", url: "/dashboard/customer/profile", icon: User }
+
   ],
   owner: [
     { name: "Dashboard", url: "/dashboard/owner", icon: LayoutDashboard },
