@@ -99,7 +99,7 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
 
                                         <TableCell>
 
-                                            <div className="flex justify-end gap-1.5">
+                                            <div className="flex cursor-pointer justify-end gap-1.5">
                                                 {status !== "approved" && (
                                                     <ButtonTooltip
                                                         equipment={equipment}

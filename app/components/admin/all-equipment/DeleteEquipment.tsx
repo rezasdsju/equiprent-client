@@ -67,7 +67,7 @@ export function DeleteEquipment({ equipment }: { equipment: IEquipment }) {
         <AlertDialog>
             <AlertDialogTrigger
                 render={
-                    <Button variant="destructive">
+                    <Button variant="destructive" className={`cursor-pointer`}>
                         <Trash2 className="size-4" />
                     </Button>
                 }
