@@ -5,17 +5,20 @@ import { MapPin, Heart, CalendarDays, Package, User, FileText, Mail, Phone } fro
 import { Badge } from "@/components/ui/badge"
 import type { IEquipment } from "@/types/equipmentTypes"
 import EquipmentBooking from "./EquipmentBooking"
-import { toast } from "../ui/toast"
-import { addToFavourite } from "@/lib/actions/favourite"
+
 import AddToFavourite from "./AddToFavourite"
 import { getFavouriteByEquipmentId } from "@/lib/api/favourite"
+import { getSession } from "@/lib/core/server"
 
 
 const EquipmentDetail = async ({ equipment }: { equipment: IEquipment }) => {
     const isAvailable = equipment.availableQuantity > 0
 
     const favourite = await getFavouriteByEquipmentId(equipment._id || '')
-    console.log(favourite)
+    // console.log(favourite)
+
+    const session = await getSession()
+    const isOwner = session?.user?.id === equipment.owner?._id?.toString()
 
 
     return (
@@ -76,16 +79,20 @@ const EquipmentDetail = async ({ equipment }: { equipment: IEquipment }) => {
                         </div>
                     </div>
 
-                    {/* UI only: no functionality yet */}
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                        <EquipmentBooking equipment={equipment}></EquipmentBooking>
+                    <div>
+                        {!isOwner &&
 
-                        <AddToFavourite favourite={favourite} equipment={equipment}></AddToFavourite>
+                            <div className="flex flex-col gap-3 sm:flex-row">
+                                <EquipmentBooking equipment={equipment}></EquipmentBooking>
+
+                                <AddToFavourite favourite={favourite} equipment={equipment}></AddToFavourite>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
 
-            {/* Lower details */}
+
             <div className="mt-8 grid gap-6 lg:grid-cols-3">
                 <div className="space-y-6 lg:col-span-2">
                     <div className="space-y-2">
