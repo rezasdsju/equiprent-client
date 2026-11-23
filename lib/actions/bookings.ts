@@ -17,7 +17,7 @@ export const bookEquipment = async (bookingData: IAddBooking) => {
 // Admin
 export const updateBookingStatus = async (
     id: string,
-    bookingStatus: "confirmed" | "canceled"
+    bookingStatus: "confirmed" | "cancelled" | "completed"
 ) => {
     const api = `${BASE_URL}/admin/rentals/${id}`
     const res = await protectedMutation(api, "PATCH", { bookingStatus })
