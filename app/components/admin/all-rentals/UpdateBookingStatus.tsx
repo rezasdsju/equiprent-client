@@ -14,7 +14,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-type BookingStatusUpdate = "confirmed" | "canceled"
+type BookingStatusUpdate = "confirmed" | "cancelled" | "completed"
 
 const UpdateBookingStatus = ({ rental }: { rental: IBooking }) => {
     const [bookingStatus, setBookingStatus] =
@@ -23,7 +23,11 @@ const UpdateBookingStatus = ({ rental }: { rental: IBooking }) => {
     const router = useRouter()
 
     const handleBookingStatus = async (value: string | null) => {
-        if (value !== "confirmed" && value !== "canceled") {
+        if (
+            value !== "confirmed" &&
+            value !== "cancelled" &&
+            value !== "completed"
+        ) {
             return
         }
 
@@ -36,9 +40,7 @@ const UpdateBookingStatus = ({ rental }: { rental: IBooking }) => {
             )
 
             if (result.ok) {
-                setBookingStatus(
-                    value === "canceled" ? "cancelled" : "confirmed"
-                )
+                setBookingStatus(value)
 
                 toast.add({
                     type: "success",
@@ -94,7 +96,13 @@ const UpdateBookingStatus = ({ rental }: { rental: IBooking }) => {
                     </SelectItem>
                 )}
 
-                <SelectItem value="canceled">
+                {bookingStatus === "confirmed" && (
+                    <SelectItem value="completed">
+                        Complete
+                    </SelectItem>
+                )}
+
+                <SelectItem value="cancelled">
                     Cancel
                 </SelectItem>
             </SelectContent>
