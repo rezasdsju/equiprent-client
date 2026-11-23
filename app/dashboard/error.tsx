@@ -4,10 +4,10 @@ import { useEffect } from 'react'
 
 export default function Error({
     error,
-    reset,
+    retry,
 }: {
     error: Error & { digest?: string }
-    reset: () => void
+    retry: () => void
 }) {
     useEffect(() => {
         console.error(error)
@@ -17,7 +17,8 @@ export default function Error({
         <div>
             <h2>Something went wrong!</h2>
             <p>We encountered an unexpected error.</p>
-            <button onClick={() => reset()}>
+            {error.digest && <p>Error reference: {error.digest}</p>}
+            <button onClick={() => retry()}>
                 Try Again
             </button>
         </div>
