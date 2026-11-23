@@ -93,7 +93,7 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                     <div>
                                         <p className="text-muted-foreground">Rental Price</p>
                                         <p className="mt-1 font-medium">
-                                            ৳{equipment.rentalPrice} / {equipment.rentalType}
+                                            ${equipment.rentalPrice} / {equipment.rentalType}
                                         </p>
                                     </div>
                                     <div>

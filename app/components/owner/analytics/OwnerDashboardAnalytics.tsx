@@ -14,9 +14,9 @@ import {
 import type { IOwnerAnalytics } from "@/types/analyticsTypes"
 
 const numberFormatter = new Intl.NumberFormat("en-US")
-const currencyFormatter = new Intl.NumberFormat("en-BD", {
+const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
-  currency: "BDT",
+  currency: "USD",
   maximumFractionDigits: 2,
 })
 

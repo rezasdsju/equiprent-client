@@ -42,7 +42,7 @@ const PaymentPage = async ({ searchParams }: { searchParams: Promise<{ bookingId
         });
 
     const formatPrice = (price: number) =>
-        `৳${price?.toLocaleString("en-BD")}`;
+        `$${price?.toLocaleString("en-US")}`;
 
     return (
         <div className="min-h-screen bg-muted/30 py-10 sm:py-14">

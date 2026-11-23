@@ -71,7 +71,7 @@ const RecentlyAddedEquipment = async () => {
                                 <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">
                                     <div>
                                         <span className="text-lg font-bold">
-                                            ৳{equipment.rentalPrice.toLocaleString("en-BD")}
+                                            ${equipment.rentalPrice.toLocaleString("en-US")}
                                         </span>
                                         <span className="text-xs text-muted-foreground">
                                             /{equipment.rentalType.toLowerCase()}

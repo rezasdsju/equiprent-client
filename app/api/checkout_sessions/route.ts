@@ -53,7 +53,7 @@ export async function POST(req: Request) {
             line_items: [
                 {
                     price_data: {
-                        currency: 'bdt',
+                        currency: 'usd',
                         product_data: {
                             name: booking.equipmentName,
                         },
