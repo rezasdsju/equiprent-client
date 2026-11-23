@@ -39,3 +39,15 @@ export const updateBookingStatusByOwner = async (
 
     return { ok: res.ok, ...result }
 }
+
+
+
+
+// Customer
+export const deleteBookingByCustomer = async (id: string) => {
+    const api = `${BASE_URL}/customer/bookings/${id}`
+    const res = await protectedMutation(api, "DELETE")
+    const result = await res.json()
+
+    return { ok: res.ok, ...result }
+}
