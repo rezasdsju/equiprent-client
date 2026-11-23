@@ -112,7 +112,7 @@ const Navbar = () => {
                     ) : user ? (
                         <div className="flex items-center gap-3">
                             <ProfileMenuPopOver user={user} />
-
+                            {/* 
                             <Button
                                 variant="outline"
                                 size="sm"
@@ -121,7 +121,7 @@ const Navbar = () => {
                                 disabled={isSigningOut}
                             >
                                 {isSigningOut ? "Signing out..." : "Log Out"}
-                            </Button>
+                            </Button> */}
                         </div>
                     ) : (
                         <>
