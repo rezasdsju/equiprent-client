@@ -67,7 +67,7 @@ const DeleteBooking = ({ booking }: { booking: IBooking }) => {
                 disabled={deletingBooking}
             >
                 <Trash2 className="size-4" />
-                Delete Booking
+                Delete
             </Button>
         </div>
     )
