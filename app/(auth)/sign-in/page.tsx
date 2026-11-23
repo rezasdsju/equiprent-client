@@ -1,5 +1,5 @@
 'use client'
-import { cn } from "cn"
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
 import { toast } from "@/components/ui/toast"
 import Link from "next/link"
+import { Eye, EyeOff } from "lucide-react"
 
 
 
@@ -28,6 +29,7 @@ export default function SigninPage() {
 
     const router = useRouter()
     const [clickedToLoginrButton, setClickedToLoginrButton] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSignIn = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -113,7 +115,24 @@ export default function SigninPage() {
                                         Forgot your password?
                                     </a>
                                 </div>
-                                <Input name="password" id="password" type="password" required />
+                                <div className="relative">
+                                    <Input
+                                        name="password"
+                                        id="password"
+                                        type={showPassword ? "text" : "password"}
+                                        className="pr-10"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        aria-pressed={showPassword}
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                    >
+                                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                    </button>
+                                </div>
                             </Field>
                             <Field>
                                 <Button disabled={clickedToLoginrButton} type="submit">Login</Button>

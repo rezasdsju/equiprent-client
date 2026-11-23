@@ -19,6 +19,7 @@ import { UploadImage } from "@/hooks/useImageUpload"
 import { authClient } from "@/lib/auth-client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { Eye, EyeOff } from "lucide-react"
 import React, { useState } from "react"
 
 export default function RegisterForm() {
@@ -26,6 +27,7 @@ export default function RegisterForm() {
     const { imagePreview, imageUrl, isUploadingImage, handleImageChange } = UploadImage()
 
     const [clickedToRegisterButton, setClickedToRegisterButton] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const handleRegister = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -170,7 +172,24 @@ export default function RegisterForm() {
 
                         <Field>
                             <FieldLabel htmlFor="password">Password</FieldLabel>
-                            <Input name="password" id="password" type="password" required />
+                            <div className="relative">
+                                <Input
+                                    name="password"
+                                    id="password"
+                                    type={showPassword ? "text" : "password"}
+                                    className="pr-10"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                    aria-pressed={showPassword}
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                >
+                                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                </button>
+                            </div>
                             <FieldDescription>
                                 Must contain an uppercase letter, a lowercase letter, and at least 6 characters.
                             </FieldDescription>
