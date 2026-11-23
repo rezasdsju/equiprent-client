@@ -26,7 +26,10 @@ export const getToken = async () => {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jwt`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'x-internal-key': process.env.INTERNAL_API_KEY!
+        },
         body: JSON.stringify({ email: session.user.email }),
         cache: 'no-store'
     })
