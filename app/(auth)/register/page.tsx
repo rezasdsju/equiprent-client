@@ -36,7 +36,7 @@ export default function RegisterForm() {
         if (!imagePreview && !imageUrl) {
             toast.add({
                 type: "error",
-                description: "Please upload your profile photo again",
+                description: "Please upload a profile photo before creating your account.",
                 priority: "high"
             })
             return
@@ -53,7 +53,7 @@ export default function RegisterForm() {
         ) {
             toast.add({
                 type: "error",
-                description: "Password must contain uppercase, lowercase letters and at least 6 characters",
+                description: "Choose a password with at least 6 characters, including an uppercase and a lowercase letter.",
                 priority: "high"
             })
             return
@@ -68,7 +68,7 @@ export default function RegisterForm() {
         if (error) {
             toast.add({
                 type: 'error',
-                description: 'Error',
+                description: error.message || "We couldn't create your account. Please try again.",
                 priority: 'high'
             })
             setClickedToRegisterButton(false)
@@ -76,7 +76,7 @@ export default function RegisterForm() {
         if (data) {
             toast.add({
                 type: 'success',
-                description: 'success',
+                description: 'Your account has been created successfully. Redirecting you now.',
                 priority: 'high'
             })
             router.push('/')
@@ -94,7 +94,7 @@ export default function RegisterForm() {
         if (error) {
             toast.add({
                 type: 'error',
-                description: 'Google sign-in failed. Please try again.',
+                description: error.message || "We couldn't start Google sign-in. Please try again.",
                 priority: 'high'
             })
         }
@@ -102,7 +102,7 @@ export default function RegisterForm() {
         if (data) {
             toast.add({
                 type: 'success',
-                description: 'Redirecting to Google...',
+                description: "Google sign-in is starting. You'll be redirected shortly.",
                 priority: 'high'
             })
         }

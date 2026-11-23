@@ -44,7 +44,7 @@ export default function SigninPage() {
         if (error) {
             toast.add({
                 type: 'error',
-                description: 'Error',
+                description: error.message || "We couldn't sign you in. Check your email and password, then try again.",
                 priority: 'high'
             })
             setClickedToLoginrButton(false)
@@ -52,7 +52,7 @@ export default function SigninPage() {
         if (data) {
             toast.add({
                 type: 'success',
-                description: 'You have successfully signed in!',
+                description: "You've signed in successfully. Redirecting you to the home page.",
                 priority: 'high'
             })
             router.push('/')
@@ -70,7 +70,7 @@ export default function SigninPage() {
         if (error) {
             toast.add({
                 type: 'error',
-                description: 'Google sign-in failed. Please try again.',
+                description: error.message || "We couldn't sign in with Google. Please try again.",
                 priority: 'high'
             })
         }
@@ -78,7 +78,7 @@ export default function SigninPage() {
         if (data) {
             toast.add({
                 type: 'success',
-                description: 'Redirecting to Google...',
+                description: "Continue with Google to finish signing in.",
                 priority: 'high'
             })
         }
