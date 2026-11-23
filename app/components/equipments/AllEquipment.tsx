@@ -53,7 +53,7 @@ const AllEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                         </span>
                     </p>
                 </div>
-            </section>
+            </section>s
 
             <div className="mx-auto w-full max-w-7xl px-4 sm:w-[calc(100%-2rem)] sm:px-0 lg:w-[calc(100%-3rem)]">
                 <EquipmentFilterBar />

@@ -1,9 +1,9 @@
 'use client'
 
 import { Heart } from "lucide-react"
-import { Button } from "../ui/button"
+import { Button } from "../../../components/ui/button"
 import type { IEquipment } from "@/types/equipmentTypes"
-import { toast } from "../ui/toast"
+import { toast } from "../../../components/ui/toast"
 import { deleteFromFavourite } from "@/lib/actions/favourite"
 import { useRouter } from "next/navigation"
 import { useState } from "react"

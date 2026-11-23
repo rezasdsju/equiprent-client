@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button"
 import { IEquipment } from "@/types/equipmentTypes";
-import { toast } from "../ui/toast";
+import { toast } from "../../../components/ui/toast";
 import { addToFavourite } from "@/lib/actions/favourite";
 import { Heart } from "lucide-react";
 import { IFavourite } from "@/types/favouriteTypes";

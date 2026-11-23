@@ -1,4 +1,4 @@
-import EquipmentDetail from "@/components/equipments/EquipmentDetail";
+import EquipmentDetail from "@/app/components/equipments/EquipmentDetail";
 import { getEquipmentById } from "@/lib/api/equipments";
 import { IEquipment } from "@/types/equipmentTypes";
 
