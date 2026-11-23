@@ -112,11 +112,21 @@ const CustomerDashboardPage = async () => {
 
             {/* Quick links */}
             <div className="flex flex-wrap gap-3">
-                <Button render={<Link href="/all-equipments" />}>Browse Equipment</Button>
-                <Button variant="outline" render={<Link href="/dashboard/customer/my-favourites" />}>
+                <Button nativeButton={false} render={<Link href="/all-equipments" />}>
+                    Browse Equipment
+                </Button>
+                <Button
+                    variant="outline"
+                    nativeButton={false}
+                    render={<Link href="/dashboard/customer/my-favourites" />}
+                >
                     My Favorites
                 </Button>
-                <Button variant="outline" render={<Link href="/dashboard/customer/profile" />}>
+                <Button
+                    variant="outline"
+                    nativeButton={false}
+                    render={<Link href="/dashboard/customer/profile" />}
+                >
                     Profile
                 </Button>
             </div>
