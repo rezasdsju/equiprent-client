@@ -25,3 +25,17 @@ export const updateBookingStatus = async (
 
     return { ok: res.ok, ...result }
 }
+
+
+
+// Owner 
+export const updateBookingStatusByOwner = async (
+    id: string,
+    bookingStatus: "confirmed" | "cancelled" | "completed"
+) => {
+    const api = `${BASE_URL}/owner/my-equipments-rental/${id}`
+    const res = await protectedMutation(api, "PATCH", { bookingStatus })
+    const result = await res.json()
+
+    return { ok: res.ok, ...result }
+}
