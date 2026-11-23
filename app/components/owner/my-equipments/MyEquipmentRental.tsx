@@ -1,6 +1,7 @@
 
 import { IBooking } from "@/types/bookingTypes"
 import { Package, CheckCircle2, Clock3 } from "lucide-react"
+import MyEquipmentRentalAction from "./MyEquipmentRentalAction"
 
 const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
     const totalRentals = rentals.length
@@ -88,7 +89,7 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                 <>
                     {/* Desktop Table */}
                     <div className="hidden overflow-x-auto rounded-xl border lg:block">
-                        <table className="w-full min-w-225 text-sm">
+                        <table className="w-full min-w-275 text-sm">
                             <thead className="bg-muted/50">
                                 <tr className="text-left">
                                     <th className="px-5 py-4 font-semibold">Customer Information</th>
@@ -98,6 +99,7 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                                     <th className="px-5 py-4 font-semibold">Booking Amount</th>
                                     <th className="px-5 py-4 font-semibold">Payment Status</th>
                                     <th className="px-5 py-4 font-semibold">Booking Status</th>
+                                    <th className="px-5 py-4 font-semibold">Action</th>
                                 </tr>
                             </thead>
 
@@ -141,6 +143,10 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                                                 {rental.bookingStatus}
                                             </span>
                                         </td>
+                                        <td className="px-5 py-4">
+                                            <MyEquipmentRentalAction rental={rental} />
+                                        </td>
+
                                     </tr>
                                 ))}
                             </tbody>
@@ -185,20 +191,25 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-3">
-                                    <div>
+                                <div className="grid grid-cols-2 gap-4 border-t pt-3">
+                                    <div className="min-w-0">
                                         <p className="mb-2 text-xs text-muted-foreground">Payment Status</p>
                                         <span className={`rounded-full px-3 py-1 text-xs font-medium ${getPaymentStatusStyle(rental.paymentStatus)}`}>
                                             {rental.paymentStatus}
                                         </span>
                                     </div>
 
-                                    <div>
+                                    <div className="min-w-0">
                                         <p className="mb-2 text-xs text-muted-foreground">Booking Status</p>
                                         <span className={`rounded-full px-3 py-1 text-xs font-medium ${getBookingStatusStyle(rental.bookingStatus)}`}>
                                             {rental.bookingStatus}
                                         </span>
                                     </div>
+                                </div>
+
+                                <div className="border-t pt-3">
+                                    <p className="mb-2 text-xs text-muted-foreground">Action</p>
+                                    <MyEquipmentRentalAction rental={rental} />
                                 </div>
                             </div>
                         ))}
