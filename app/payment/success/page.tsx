@@ -56,11 +56,17 @@ export default async function Success({
                     )}
 
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                        <Button render={<Link href="/dashboard/customer/my-rentals" />}>
+                        <Button
+                            nativeButton={false}
+                            render={<Link href="/dashboard/customer/my-rentals" />}
+                        >
                             View My Rentals
                             <ArrowRight className="size-4" />
                         </Button>
-                        <Button variant="outline" render={<Link href="/" />}>
+                        <Button
+                            nativeButton={false}
+                            variant="outline" render={<Link href="/" />}
+                        >
                             Back to Home
                         </Button>
                     </div>
