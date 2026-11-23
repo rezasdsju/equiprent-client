@@ -1,6 +1,7 @@
 
 import type { IBooking } from "@/types/bookingTypes"
 import Link from "next/link"
+import DeleteBooking from "./DeleteBooking"
 
 const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
     return (
@@ -72,10 +73,10 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                             <td className="px-4 py-4">
                                                 <span
                                                     className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.paymentStatus === "paid"
-                                                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                                            : booking.paymentStatus === "unpaid"
-                                                                ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                                                                : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                                        : booking.paymentStatus === "unpaid"
+                                                            ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                            : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                                         }`}
                                                 >
                                                     {booking.paymentStatus}
@@ -85,12 +86,12 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                             <td className="px-4 py-4">
                                                 <span
                                                     className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.bookingStatus === "completed"
-                                                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                                            : booking.bookingStatus === "confirmed"
-                                                                ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                                                                : booking.bookingStatus === "pending"
-                                                                    ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                                                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                                        : booking.bookingStatus === "confirmed"
+                                                            ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                                                            : booking.bookingStatus === "pending"
+                                                                ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                                : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                                         }`}
                                                 >
                                                     {booking.bookingStatus}
@@ -108,12 +109,7 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                                 )}
 
                                                 {booking.paymentStatus === "paid" && (
-                                                    <button
-                                                        type="button"
-                                                        className="whitespace-nowrap rounded-lg border border-destructive/30 px-4 py-2 text-xs font-semibold text-destructive transition-colors hover:bg-destructive hover:text-white"
-                                                    >
-                                                        Delete
-                                                    </button>
+                                                    <DeleteBooking booking={booking} />
                                                 )}
                                             </td>
                                         </tr>
@@ -184,10 +180,10 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                 <div className="flex flex-wrap items-center gap-2 border-t p-4">
                                     <span
                                         className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.paymentStatus === "paid"
-                                                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                                : booking.paymentStatus === "unpaid"
-                                                    ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                            : booking.paymentStatus === "unpaid"
+                                                ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                             }`}
                                     >
                                         Payment: {booking.paymentStatus}
@@ -195,12 +191,12 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
 
                                     <span
                                         className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.bookingStatus === "completed"
-                                                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                                : booking.bookingStatus === "confirmed"
-                                                    ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                                                    : booking.bookingStatus === "pending"
-                                                        ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                                                        : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                            : booking.bookingStatus === "confirmed"
+                                                ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                                                : booking.bookingStatus === "pending"
+                                                    ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                             }`}
                                     >
                                         Booking: {booking.bookingStatus}
@@ -216,12 +212,7 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                     )}
 
                                     {booking.paymentStatus === "paid" && (
-                                        <button
-                                            type="button"
-                                            className="w-full rounded-lg border border-destructive/30 px-4 py-2.5 text-sm font-semibold text-destructive transition-colors hover:bg-destructive hover:text-white"
-                                        >
-                                            Delete
-                                        </button>
+                                        <DeleteBooking booking={booking} />
                                     )}
                                 </div>
                             </article>
