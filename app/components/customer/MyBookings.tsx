@@ -1,5 +1,6 @@
 
 import type { IBooking } from "@/types/bookingTypes"
+import Link from "next/link"
 
 const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
     return (
@@ -24,7 +25,7 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                     {/* Desktop Table */}
                     <div className="hidden min-w-0 overflow-hidden rounded-xl border md:block">
                         <div className="w-full overflow-x-auto">
-                            <table className="w-full min-w-[1050px] text-sm">
+                            <table className="w-full min-w-262.5 text-sm">
                                 <thead className="bg-muted/50">
                                     <tr className="text-left">
                                         <th className="px-4 py-4 font-semibold">Equipment</th>
@@ -50,7 +51,7 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                                         alt={booking.equipmentName}
                                                         className="h-12 w-12 shrink-0 rounded-lg object-cover"
                                                     />
-                                                    <span className="max-w-[200px] font-medium">
+                                                    <span className="max-w-50 font-medium">
                                                         {booking.equipmentName}
                                                     </span>
                                                 </div>
@@ -70,13 +71,12 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
 
                                             <td className="px-4 py-4">
                                                 <span
-                                                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${
-                                                        booking.paymentStatus === "paid"
+                                                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.paymentStatus === "paid"
                                                             ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                                             : booking.paymentStatus === "unpaid"
                                                                 ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                                                                 : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {booking.paymentStatus}
                                                 </span>
@@ -84,15 +84,14 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
 
                                             <td className="px-4 py-4">
                                                 <span
-                                                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${
-                                                        booking.bookingStatus === "completed"
+                                                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.bookingStatus === "completed"
                                                             ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                                             : booking.bookingStatus === "confirmed"
                                                                 ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                                                                 : booking.bookingStatus === "pending"
                                                                     ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                                                                     : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {booking.bookingStatus}
                                                 </span>
@@ -100,12 +99,12 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
 
                                             <td className="px-4 py-4 text-center">
                                                 {booking.paymentStatus === "unpaid" && (
-                                                    <button
-                                                        type="button"
-                                                        className="whitespace-nowrap rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                                                    <Link
+                                                        href={`/payment?bookingId=${booking._id}`}
+                                                        className="inline-flex whitespace-nowrap rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                                                     >
                                                         Pay Now
-                                                    </button>
+                                                    </Link>
                                                 )}
 
                                                 {booking.paymentStatus === "paid" && (
@@ -184,38 +183,36 @@ const MyBookings = ({ bookings }: { bookings: IBooking[] }) => {
                                 {/* Status & Actions */}
                                 <div className="flex flex-wrap items-center gap-2 border-t p-4">
                                     <span
-                                        className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${
-                                            booking.paymentStatus === "paid"
+                                        className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.paymentStatus === "paid"
                                                 ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                                 : booking.paymentStatus === "unpaid"
                                                     ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                                                     : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                                        }`}
+                                            }`}
                                     >
                                         Payment: {booking.paymentStatus}
                                     </span>
 
                                     <span
-                                        className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${
-                                            booking.bookingStatus === "completed"
+                                        className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${booking.bookingStatus === "completed"
                                                 ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                                 : booking.bookingStatus === "confirmed"
                                                     ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                                                     : booking.bookingStatus === "pending"
                                                         ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                                                         : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                                        }`}
+                                            }`}
                                     >
                                         Booking: {booking.bookingStatus}
                                     </span>
 
                                     {booking.paymentStatus === "unpaid" && (
-                                        <button
-                                            type="button"
-                                            className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                                        <Link
+                                            href={`/payment?bookingId=${booking._id}`}
+                                            className="block w-full rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                                         >
                                             Pay Now
-                                        </button>
+                                        </Link>
                                     )}
 
                                     {booking.paymentStatus === "paid" && (
