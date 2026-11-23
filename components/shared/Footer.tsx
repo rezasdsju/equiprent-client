@@ -11,8 +11,11 @@ import {
 
 import DarkFooterLogo from "@/app/assets/dark-logo.png";
 import LightFooterLogo from "@/app/assets/light-logo.png";
+import { getSession } from "@/lib/core/server";
 
-const Footer = () => {
+const Footer = async () => {
+  const session = await getSession()
+  const user = session?.user
   return (
     <footer className="site-footer border-t bg-muted/30">
       <div className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:py-16">
@@ -88,22 +91,31 @@ const Footer = () => {
                   All Equipment
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/sign-in"
-                  className="transition-colors hover:text-primary"
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/register"
-                  className="transition-colors hover:text-primary"
-                >
-                  Register
-                </Link>
-              </li>
+              {
+                user ?
+                  <li>
+                    <Link href={`/dashboard/${user.role}`}>Dashboard</Link>
+                  </li> :
+                  <>
+                    <li>
+                      <Link
+                        href="/sign-in"
+                        className="transition-colors hover:text-primary"
+                      >
+                        Login
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/register"
+                        className="transition-colors hover:text-primary"
+                      >
+                        Register
+                      </Link>
+                    </li>
+                  </>
+              }
+
             </ul>
           </div>
 
