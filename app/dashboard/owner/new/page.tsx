@@ -18,6 +18,7 @@ import { addEquipment } from "@/lib/actions/equipments"
 import { IAddEquipment } from "@/types/equipmentTypes"
 
 import { CATEGORIES, RENTAL_TYPES } from "@/constants/equipment";
+import { useRouter } from "next/navigation"
 
 const Field = ({
     label,
@@ -35,7 +36,7 @@ const Field = ({
 )
 
 const AddEquipmentPage = () => {
-
+    const router = useRouter()
 
     const [selectedCategory, setSelectedCategory] = useState<string | null>("")
     const [rentalType, setRentalType] = useState<string | null>("")
@@ -108,6 +109,7 @@ const AddEquipmentPage = () => {
             setSelectedCategory("")
             setRentalType("")
             resetImage()
+            router.replace("/dashboard/owner/my-equipments")
         } catch (error) {
             // console.error("Add equipment error:", error)
 
