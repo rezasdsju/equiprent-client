@@ -1,8 +1,8 @@
 'use client'
-import { updateEquipment } from "@/lib/actions/equipments";
 import { IEquipment } from "@/types/equipmentTypes";
 import { UpdateEquipment } from "./UpdateEquipment";
 import { DeleteEquipment } from "./DeleteEquipment";
+import Link from "next/link";
 
 const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
 
@@ -67,9 +67,14 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                             <div className="flex items-center gap-2">
                                                 <UpdateEquipment equipment={equipment}></UpdateEquipment>
                                                 <DeleteEquipment equipment={equipment}></DeleteEquipment>
-                                                <button className="rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-60">
-                                                    View Details
-                                                </button>
+                                                {equipment._id && (
+                                                    <Link
+                                                        href={`/all-equipments/${equipment._id}`}
+                                                        className="rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground"
+                                                    >
+                                                        Details
+                                                    </Link>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
@@ -123,9 +128,14 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                     <button disabled className="rounded-md border px-3 py-2 text-xs opacity-60">
                                         Delete
                                     </button>
-                                    <button disabled className="rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground opacity-60">
-                                        View Details
-                                    </button>
+                                    {equipment._id && (
+                                        <Link
+                                            href={`/all-equipments/${equipment._id}`}
+                                            className="rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground"
+                                        >
+                                            Details
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         ))}
