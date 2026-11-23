@@ -233,7 +233,7 @@ const EquipmentBooking = ({ equipment }: { equipment: IEquipment }) => {
                                     Price per {equipment.rentalType.toLowerCase()}
                                 </span>
                                 <span className="font-medium">
-                                    ${equipment.rentalPrice.toLocaleString()}
+                                    ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                                 </span>
                             </div>
                             <div className="mt-1 flex items-center justify-between">

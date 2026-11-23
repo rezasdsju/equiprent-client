@@ -99,7 +99,7 @@ const FeaturedEquipment = ({
                           Rental Price
                         </p>
                         <p className="text-lg font-bold text-primary">
-                          ${equipment.rentalPrice.toLocaleString()}
+                          ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                           <span className="text-xs font-normal text-muted-foreground">
                             {" "}/ {equipment.rentalType.toLowerCase()}
                           </span>

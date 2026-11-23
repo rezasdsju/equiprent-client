@@ -17,9 +17,10 @@ import {
 import type { IAdminAnalytics } from "@/types/analyticsTypes"
 
 const numberFormatter = new Intl.NumberFormat("en-US")
-const currencyFormatter = new Intl.NumberFormat("en-US", {
+const currencyFormatter = new Intl.NumberFormat("en-BD", {
     style: "currency",
-    currency: "USD",
+    currency: "BDT",
+    currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 2,
 })
 

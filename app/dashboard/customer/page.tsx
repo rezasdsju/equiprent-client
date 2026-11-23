@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CalendarCheck, DollarSign, Heart, ArrowRight } from "lucide-react"
+import { CalendarCheck, Wallet, Heart, ArrowRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { getRentalOfCustomer } from "@/lib/api/rental"
@@ -37,7 +37,7 @@ const CustomerDashboardPage = async () => {
 
     const stats = [
         { label: "Total Rentals", value: rentals.length, icon: CalendarCheck },
-        { label: "Total Spent", value: `$${totalSpent.toLocaleString()}`, icon: DollarSign },
+        { label: "Total Spent", value: `৳${totalSpent.toLocaleString("en-BD")}`, icon: Wallet },
         { label: "Favorites", value: favourites.length, icon: Heart },
     ]
 
@@ -98,7 +98,7 @@ const CustomerDashboardPage = async () => {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span className="text-sm font-semibold">
-                                        ${r.totalAmount.toLocaleString()}
+                                        ৳{r.totalAmount.toLocaleString("en-BD")}
                                     </span>
                                     <Badge variant="secondary" className={`capitalize ${statusStyles[r.paymentStatus] ?? ""}`}>
                                         {r.paymentStatus}

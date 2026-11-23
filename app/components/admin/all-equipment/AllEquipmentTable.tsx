@@ -83,7 +83,7 @@ const AllEquipmentTable = ({ equipments }: { equipments: IEquipment[] }) => {
                                         <TableCell className="whitespace-nowrap">{equipment.category}</TableCell>
 
                                         <TableCell className="whitespace-nowrap">
-                                            ${equipment.rentalPrice.toLocaleString()}
+                                            ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                                             <span className="text-xs text-muted-foreground">
                                                 {" "}/ {equipment.rentalType}
                                             </span>

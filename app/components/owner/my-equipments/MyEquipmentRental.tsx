@@ -129,7 +129,7 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                                         </td>
 
                                         <td className="px-5 py-4 font-medium whitespace-nowrap">
-                                            ${rental.totalAmount.toLocaleString("en-US")}
+                                            ৳{rental.totalAmount.toLocaleString("en-BD")}
                                         </td>
 
                                         <td className="px-5 py-4">
@@ -186,7 +186,7 @@ const MyEquipmentRental = ({ rentals }: { rentals: IBooking[] }) => {
                                     <div>
                                         <p className="text-xs text-muted-foreground">Booking Amount</p>
                                         <p className="mt-1 text-sm font-medium">
-                                            ${rental.totalAmount.toLocaleString("en-US")}
+                                            ৳{rental.totalAmount.toLocaleString("en-BD")}
                                         </p>
                                     </div>
                                 </div>

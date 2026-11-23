@@ -77,7 +77,7 @@ const Rental = ({ rentals }: { rentals: IBooking[] }) => {
                                         {formatDate(rental.bookingDate)}
                                     </TableCell>
                                     <TableCell className="whitespace-nowrap font-medium">
-                                        ${rental.totalAmount.toLocaleString()}
+                                        ৳{rental.totalAmount.toLocaleString("en-BD")}
                                     </TableCell>
                                     <TableCell>
                                         <Badge

@@ -3,7 +3,7 @@
 import {
     CalendarDays,
     CircleCheck,
-    DollarSign,
+    Banknote,
     LayoutGrid,
     Search,
     SlidersHorizontal,
@@ -208,13 +208,13 @@ const EquipmentFilterBar = () => {
 
                 {/* Price Range */}
                 <div className="flex min-w-0 flex-col gap-2">
-                    <FilterLabel icon={<DollarSign className="size-4" />}>
+                    <FilterLabel icon={<Banknote className="size-4" />}>
                         Price Range
                     </FilterLabel>
 
                     <div className="flex items-center gap-2">
                         <div className="relative min-w-0 flex-1">
-                            <DollarSign className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+                            <Banknote className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
 
                             <Input
                                 type="number"
@@ -230,7 +230,7 @@ const EquipmentFilterBar = () => {
                         <span className="text-muted-foreground">–</span>
 
                         <div className="relative min-w-0 flex-1">
-                            <DollarSign className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+                            <Banknote className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
 
                             <Input
                                 type="number"

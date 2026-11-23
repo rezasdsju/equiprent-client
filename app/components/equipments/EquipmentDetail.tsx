@@ -55,7 +55,7 @@ const EquipmentDetail = async ({ equipment }: { equipment: IEquipment }) => {
 
                     <div className="rounded-xl border bg-card p-4">
                         <p className="text-3xl font-bold">
-                            ${equipment.rentalPrice?.toLocaleString()}
+                            ৳{equipment.rentalPrice?.toLocaleString("en-BD")}
                             <span className="text-base font-normal text-muted-foreground">
                                 {" "}/ {equipment.rentalType}
                             </span>

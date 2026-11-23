@@ -28,9 +28,10 @@ import {
 import type { IBooking } from "@/types/bookingTypes"
 import UpdateBookingStatus from "./UpdateBookingStatus"
 
-const currencyFormatter = new Intl.NumberFormat("en-US", {
+const currencyFormatter = new Intl.NumberFormat("en-BD", {
     style: "currency",
-    currency: "USD",
+    currency: "BDT",
+    currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 0,
 })
 

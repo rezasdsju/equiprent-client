@@ -48,7 +48,7 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                             {equipment.category}
                                         </td>
                                         <td className="px-5 py-4">
-                                            ${equipment.rentalPrice} / {equipment.rentalType}
+                                            ৳{equipment.rentalPrice.toLocaleString("en-BD")} / {equipment.rentalType}
                                         </td>
                                         <td className="px-5 py-4">
                                             {equipment.availableQuantity}
@@ -98,7 +98,7 @@ const MyEquipment = ({ equipments }: { equipments: IEquipment[] }) => {
                                     <div>
                                         <p className="text-muted-foreground">Rental Price</p>
                                         <p className="mt-1 font-medium">
-                                            ${equipment.rentalPrice} / {equipment.rentalType}
+                                            ৳{equipment.rentalPrice.toLocaleString("en-BD")} / {equipment.rentalType}
                                         </p>
                                     </div>
                                     <div>

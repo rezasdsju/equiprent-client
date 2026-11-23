@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Eye, MapPin, Trash2 } from "lucide-react"
+import { Eye, MapPin } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -67,7 +67,7 @@ const Favourites = ({ favourites }: { favourites: IFavouriteWithEquipment[] }) =
                                                 <span className="truncate">{equipment.location}</span>
                                             </p>
                                             <p className="text-sm font-bold">
-                                                ${equipment.rentalPrice.toLocaleString()}
+                                                ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                                                 <span className="text-xs font-normal text-muted-foreground">
                                                     {" "}/ {equipment.rentalType}
                                                 </span>
@@ -141,7 +141,7 @@ const Favourites = ({ favourites }: { favourites: IFavouriteWithEquipment[] }) =
                                             </TableCell>
 
                                             <TableCell className="whitespace-nowrap">
-                                                ${equipment.rentalPrice.toLocaleString()}
+                                                ৳{equipment.rentalPrice.toLocaleString("en-BD")}
                                                 <span className="text-xs text-muted-foreground">
                                                     {" "}/ {equipment.rentalType}
                                                 </span>
