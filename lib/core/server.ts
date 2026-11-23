@@ -20,12 +20,24 @@ export const requireRole = async (role: string) => {
 }
 export const getToken = async () => {
     const session = await getSession()
-    if (!session || !session?.session?.token) {
+    if (!session?.user?.email) {
         redirect('/unauthorized')
     }
-    return session.session.token
-}
 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jwt`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: session.user.email }),
+        cache: 'no-store'
+    })
+
+    if (!res.ok) {
+        redirect('/unauthorized')
+    }
+
+    const { token } = await res.json()
+    return token
+}
 export const authFetch = async (api: string) => {
     const token = await getToken()
     const res = await fetch(api, {
