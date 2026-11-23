@@ -4,6 +4,7 @@ import { headers } from 'next/headers'
 import { stripe } from '@/lib/stripe'
 import { getSession } from '@/lib/core/server'
 import { getBookingById } from '@/lib/api/bookings'
+import { getEquipmentById } from '@/lib/api/equipments'
 
 export async function POST(req: Request) {
     const userSession = await getSession()
@@ -46,8 +47,29 @@ export async function POST(req: Request) {
             )
         }
 
+        if (booking.paymentStatus === 'paid') {
+            return NextResponse.json(
+                { error: 'Booking is already paid' },
+                { status: 400 }
+            )
+        }
+        const equipment = await getEquipmentById(booking.equipmentId)
+
+        if (!equipment) {
+            return NextResponse.json(
+                { error: 'Equipment not found' },
+                { status: 404 }
+            )
+        }
+
+        if (equipment.availableQuantity < booking.requiredQuantity) {
+            return NextResponse.json(
+                { error: 'Insufficient available quantity for this booking' },
+                { status: 409 }
+            )
+        }
         const headersList = await headers()
-        const origin = headersList.get('origin')
+        const origin = headersList.get('origin') || process.env.NEXT_PUBLIC_APP_URL
 
         const session = await stripe.checkout.sessions.create({
             line_items: [
@@ -57,7 +79,7 @@ export async function POST(req: Request) {
                         product_data: {
                             name: booking.equipmentName,
                         },
-                        unit_amount: booking.totalAmount * 100,
+                        unit_amount: Math.round(booking.totalAmount * 100),
                     },
                     quantity: 1,
                 },
